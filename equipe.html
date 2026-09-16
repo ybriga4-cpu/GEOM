@@ -4,11 +4,75 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Équipe — GEOM</title>
-<meta name="description" content="Le Bureau Dirigeant et le Conseil Scientifique de GEOM.">
+<meta name="description" content="Le Bureau Dirigeant et les Membres du Conseil de GEOM.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+
+<style>
+  /* --- Ajouts page Équipe : photo, popup résumé, placeholders --- */
+  .person-avatar-photo{
+    width:72px;height:72px;border-radius:50%;overflow:hidden;flex-shrink:0;
+    background:#eee;
+  }
+  .person-avatar-photo img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .person{ display:flex; gap:20px; align-items:flex-start; margin-bottom:28px; }
+  .person-placeholder{
+    border:1px dashed #c9c9c9; border-radius:10px; padding:16px 20px;
+    opacity:0.85;
+  }
+  .person-placeholder .person-avatar{
+    background:#f2f2f2; color:#9a9a9a; display:flex; align-items:center; justify-content:center;
+    width:72px; height:72px; border-radius:50%; font-family:'IBM Plex Mono', monospace; font-size:.8rem;
+    flex-shrink:0;
+  }
+  .council-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr));
+    gap:20px; margin-top:8px;
+  }
+  .council-grid .person-placeholder{ margin-bottom:0; }
+  .council-grid .person{ flex-direction:column; align-items:center; text-align:center; gap:10px; margin-bottom:0; }
+
+  .link-button{
+    background:none; border:none; padding:0; margin-top:8px;
+    font-family:'IBM Plex Sans', sans-serif; font-size:.92rem;
+    color:#0B2B50; text-decoration:underline; cursor:pointer;
+  }
+  .link-button:hover{ color:#C9A24A; }
+
+  .modal-overlay{
+    display:none; position:fixed; inset:0; background:rgba(11,43,80,0.55);
+    align-items:center; justify-content:center; padding:20px; z-index:1000;
+  }
+  .modal-overlay.is-open{ display:flex; }
+  .modal-box{
+    background:#fff; max-width:680px; width:100%; max-height:85vh; overflow-y:auto;
+    border-radius:12px; padding:32px 36px; position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal-close{
+    position:absolute; top:14px; right:18px; background:none; border:none;
+    font-size:1.6rem; line-height:1; cursor:pointer; color:#555;
+  }
+  .modal-close:hover{ color:#0B2B50; }
+  .modal-box h2{
+    font-family:'Fraunces', serif; color:#0B2B50; margin-top:0; margin-bottom:18px;
+    font-size:1.35rem; padding-right:24px;
+  }
+  .modal-body h3{
+    font-family:'Fraunces', serif; font-size:1rem; color:#C9A24A;
+    margin:22px 0 6px;
+  }
+  .modal-body h3:first-child{ margin-top:0; }
+  .modal-body p{ margin:0 0 10px; line-height:1.55; }
+  .modal-body ul{ margin:0 0 14px; padding-left:20px; }
+  .modal-body li{ margin-bottom:4px; line-height:1.5; }
+  .modal-body .job{ font-weight:600; }
+  .modal-body .period{ font-family:'IBM Plex Mono', monospace; font-size:.8rem; color:#888; display:block; margin-bottom:6px; }
+</style>
 
 </head>
 <body>
@@ -41,38 +105,91 @@
   <section style="padding-bottom:0">
     <div class="wrap">
       <p class="eyebrow">Équipe</p>
-      <h1>Bureau Dirigeant &amp; Conseil Scientifique</h1>
-      <p class="lede">GEOM est administré par un Bureau Dirigeant restreint et s'appuie sur un Conseil Scientifique indépendant qui valide les orientations de recherche et les publications. Le détail de la gouvernance élargie (Assemblée Générale, collèges sectoriels) est décrit sur la page <a href="missions.html">Missions &amp; structure</a>.</p>
+      <h1>Bureau Dirigeant &amp; Membres du Conseil</h1>
+      <p class="lede">GEOM est administré par un Bureau Dirigeant restreint et s'appuie sur des Membres du Conseil, experts indépendants qui valident les orientations de recherche et les publications. Le détail de la gouvernance élargie (Assemblée Générale, collèges sectoriels) est décrit sur la page <a href="missions.html">Missions &amp; structure</a>.</p>
     </div>
   </section>
 
   <section>
     <div class="wrap">
       <h2>Bureau Dirigeant</h2>
-      <div>
-        <div class="person">
-          <div class="person-avatar">AF</div>
+
+      <div class="person">
+        <div class="person-avatar-photo">
+          <img src="assets/img/adam-fassil.png" alt="Adam FASSIL, Président Fondateur de GEOM">
+        </div>
+        <div>
+          <h3>Adam FASSIL</h3>
+          <span class="person-role">Président Fondateur</span>
+          <p>Responsable de la direction scientifique, morale et administrative de l'association.</p>
+          <button type="button" class="link-button" onclick="document.getElementById('modal-fassil').classList.add('is-open')">
+            Résumé professionnel
+          </button>
+        </div>
+      </div>
+
+      <div class="person person-placeholder">
+        <div class="person-avatar">VP</div>
+        <div>
+          <h3>Vice-Président</h3>
+          <span class="person-role">Poste à pourvoir</span>
+          <p>Place réservée au Vice-Président du Bureau Dirigeant.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <h2>Bureau Dirigeant</h2>
+      <p class="eyebrow" style="margin-top:4px">Organe exécutif</p>
+      <p class="lede" style="margin-bottom:24px">Assure la direction morale, administrative et financière du groupement entre deux Assemblées Générales.</p>
+
+      <div class="council-grid">
+        <div class="person person-placeholder">
+          <div class="person-avatar">M1</div>
           <div>
-            <h3>Adam FASSIL</h3>
-            <span class="person-role">Président Fondateur</span>
-            <p>Responsable de la direction scientifique, morale et administrative de l'association.</p>
+            <h3 style="font-size:.95rem">Membre du Conseil</h3>
+            <span class="person-role">Poste à pourvoir</span>
+          </div>
+        </div>
+        <div class="person person-placeholder">
+          <div class="person-avatar">M2</div>
+          <div>
+            <h3 style="font-size:.95rem">Membre du Conseil</h3>
+            <span class="person-role">Poste à pourvoir</span>
+          </div>
+        </div>
+        <div class="person person-placeholder">
+          <div class="person-avatar">M3</div>
+          <div>
+            <h3 style="font-size:.95rem">Membre du Conseil</h3>
+            <span class="person-role">Poste à pourvoir</span>
+          </div>
+        </div>
+        <div class="person person-placeholder">
+          <div class="person-avatar">M4</div>
+          <div>
+            <h3 style="font-size:.95rem">Membre du Conseil</h3>
+            <span class="person-role">Poste à pourvoir</span>
+          </div>
+        </div>
+        <div class="person person-placeholder">
+          <div class="person-avatar">M5</div>
+          <div>
+            <h3 style="font-size:.95rem">Membre du Conseil</h3>
+            <span class="person-role">Poste à pourvoir</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section-alt">
-    <div class="wrap">
-      <h2>Conseil Scientifique</h2>
-      <p class="lede" style="margin-bottom:24px">Composé de chercheurs et d'experts bénévoles, chargé de valider les orientations de recherche et les publications, indépendamment du Bureau exécutif. Composition en cours de constitution.</p>
-    </div>
-  </section>
-
   <section>
     <div class="wrap">
       <div class="note-box">
-        <strong>Vous êtes opérateur économique, chercheur ou expert ?</strong> GEOM accueille de nouveaux membres opérateurs (par collège), membres actifs et membres du Conseil Scientifique. L'adhésion est gratuite — voir la page <a href="adhesion.html">Adhésion</a>.
+        <strong>Vous êtes opérateur économique, chercheur ou expert ?</strong> GEOM accueille de nouveaux membres opérateurs (par collège), membres actifs et Membres du Conseil. L'adhésion est gratuite — voir la page <a href="adhesion.html">Adhésion</a>.
       </div>
     </div>
   </section>
@@ -97,7 +214,92 @@
 
 <a class="chat-launcher" href="chat.html">Assistant GEOM →</a>
 
+<!-- Popup Résumé professionnel — Adam FASSIL -->
+<div id="modal-fassil" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-fassil-title">
+  <div class="modal-box">
+    <button type="button" class="modal-close" aria-label="Fermer" onclick="document.getElementById('modal-fassil').classList.remove('is-open')">&times;</button>
+    <h2 id="modal-fassil-title">Résumé professionnel — Adam FASSIL</h2>
+    <div class="modal-body">
+
+      <p>Adam Fassil est un dirigeant technologique, entrepreneur et investisseur fort de plus de 35 ans d'expérience internationale, répartie entre les États-Unis et le Maroc. Il a bâti sa carrière dans le secteur technologique américain, en Californie et en Arizona, avant d'élargir son champ d'action à l'investissement hôtelier et immobilier au Maroc, où il réside désormais. Il continue en parallèle d'accompagner des organisations technologiques en tant que consultant exécutif.</p>
+
+      <p>Son parcours se distingue par une double compétence : une maîtrise technique acquise auprès de grandes organisations américaines, et une capacité entrepreneuriale démontrée dans la création, le financement et la gestion opérationnelle de projets d'investissement, notamment dans l'hôtellerie et l'immobilier marocains.</p>
+
+      <h3>Parcours professionnel</h3>
+
+      <p class="job">Consultant exécutif — SoftPoint, Scottsdale (Arizona, États-Unis)</p>
+      <span class="period">Poste actuel</span>
+      <ul>
+        <li>Conseil exécutif et accompagnement stratégique de haut niveau</li>
+        <li>Conseil aux équipes dirigeantes sur la croissance, l'efficacité opérationnelle et les initiatives technologiques</li>
+        <li>Soutien au développement commercial, à la relation client et à la planification stratégique</li>
+        <li>Alignement des investissements technologiques sur les objectifs de long terme des organisations</li>
+      </ul>
+
+      <p class="job">Entrepreneur &amp; Investisseur — Maroc</p>
+      <span class="period">2000 – aujourd'hui</span>
+      <ul>
+        <li>Développement et gestion d'investissements dans l'hôtellerie, le tourisme et l'immobilier</li>
+        <li>Acquisition, rénovation et exploitation de propriétés hôtelières et d'actifs immobiliers</li>
+        <li>Pilotage de la planification, du financement et de la gestion opérationnelle de projets d'investissement</li>
+        <li>Construction de relations stratégiques avec investisseurs, entrepreneurs du bâtiment et professionnels de l'hôtellerie</li>
+        <li>Supervision du développement immobilier et de la gestion d'actifs</li>
+      </ul>
+
+      <p class="job">Associé &amp; Dirigeant d'entreprise — Technology Ventures, San Francisco &amp; Scottsdale (États-Unis)</p>
+      <ul>
+        <li>Cofondation et association dans des entreprises technologiques</li>
+        <li>Contribution à l'expansion des opérations sur des marchés américains concurrentiels</li>
+        <li>Pilotage de la planification stratégique, de l'acquisition de clients et du développement commercial</li>
+        <li>Construction de partenariats ayant contribué à une croissance significative et à une présence de marché durable</li>
+      </ul>
+
+      <p class="job">Consultant &amp; rôles exécutifs en technologie — États-Unis (IBM, HIS, MAI – Orange County, Californie)</p>
+      <ul>
+        <li>Participation à des projets d'entreprise technologiques et de solutions d'affaires (IBM)</li>
+        <li>Accompagnement de clients grands comptes dans l'implémentation de systèmes et d'initiatives technologiques</li>
+        <li>Contribution à l'amélioration de l'efficacité opérationnelle par la technologie (HIS)</li>
+        <li>Projets de systèmes technologiques et d'affaires au service des besoins clients et organisationnels (MAI)</li>
+      </ul>
+
+      <p class="job">Début de carrière — Secteur hôtelier</p>
+      <ul>
+        <li>Emploi à temps partiel dans l'hôtellerie durant ses études supérieures</li>
+        <li>Développement de compétences en service client, en gestion opérationnelle et managériale</li>
+      </ul>
+
+      <h3>Formation</h3>
+      <ul>
+        <li>Université de Marrakech (Maroc) — Études universitaires</li>
+        <li>Berkeley Extension, Berkeley (Californie, États-Unis) — Études avancées en business et technologie</li>
+      </ul>
+
+      <h3>Langues</h3>
+      <p>Arabe · Anglais · Français · Espagnol</p>
+
+      <h3>Faits marquants entrepreneuriaux</h3>
+      <ul>
+        <li>Construction d'une carrière internationale réussie entre le Maroc et les États-Unis</li>
+        <li>Participation à la croissance d'entreprises technologiques en Californie et en Arizona</li>
+        <li>Transition d'une carrière de dirigeant technologique vers l'investissement hôtelier et immobilier</li>
+        <li>Gestion et développement de projets d'investissement de long terme au Maroc</li>
+        <li>Poursuite d'un rôle de conseil stratégique auprès d'entreprises via le consulting exécutif</li>
+      </ul>
+
+    </div>
+  </div>
+</div>
+
 <script src="assets/js/main.js"></script>
+<script>
+  // Fermer la popup en cliquant sur l'overlay (hors de la boîte) ou avec Échap
+  document.getElementById('modal-fassil').addEventListener('click', function(e){
+    if(e.target === this){ this.classList.remove('is-open'); }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ document.getElementById('modal-fassil').classList.remove('is-open'); }
+  });
+</script>
 
 </body>
 </html>
