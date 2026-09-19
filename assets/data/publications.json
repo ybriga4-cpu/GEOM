@@ -1,40 +1,31 @@
 {
   "items": [
     {
-      "title": "Douanes et compétitivité : ce que change la réforme tarifaire 2026",
-      "axis": "commerce",
-      "axisLabel": "Commerce international",
-      "date": "2026-03",
-      "type": "Note d'analyse",
-      "excerpt": "Une lecture des ajustements du code des douanes et de leur effet attendu sur les flux d'import-export marocains.",
-      "file": "#"
-    },
-    {
-      "title": "Financement de projets à l'ère de la Charte de l'investissement 2023",
-      "axis": "investissement",
-      "axisLabel": "Investissement",
-      "date": "2026-01",
-      "type": "Étude",
-      "excerpt": "Panorama des primes cumulables et de leur impact réel sur la structure de financement des projets structurants.",
-      "file": "#"
-    },
-    {
-      "title": "Fiscalité des entreprises : la portée réelle du nouveau barème IS",
+      "title": "IS 2026 : un barème désormais stabilisé après quatre ans de réforme",
       "axis": "economie",
       "axisLabel": "Économie",
-      "date": "2025-11",
-      "type": "Note d'analyse",
-      "excerpt": "Simulation de l'impact du passage à un IS proportionnel sur trois profils d'entreprises marocaines.",
-      "file": "#"
+      "date": "2026-09",
+      "type": "Veille",
+      "excerpt": "La trajectoire de convergence de l'impôt sur les sociétés engagée depuis 2023 arrive à son terme : taux standard à 20% jusqu'à 100 millions DH de bénéfice net (35% au-delà), et taux plafonné à 40% pour les banques et assurances.",
+      "file": "https://www.aafir.ma/evolution-des-taux-de-limpot-sur-les-societes-is-au-maroc-de-2023-a-2026/"
     },
     {
-      "title": "Zones franches logistiques : bilan et perspectives",
+      "title": "L'ADII publie 21 nouvelles circulaires pour le 2e trimestre 2026",
       "axis": "commerce",
       "axisLabel": "Commerce international",
-      "date": "2025-09",
-      "type": "Étude",
-      "excerpt": "Évaluation de l'attractivité des zones franches marocaines pour les investisseurs régionaux.",
-      "file": "#"
+      "date": "2026-07",
+      "type": "Veille",
+      "excerpt": "Les nouveaux textes couvrent la classification tarifaire (dispositifs médicaux, robots dotés d'IA, équipements industriels) et les régimes MRE, avec un relèvement du seuil de franchise douanière au retour définitif de 30 000 à 40 000 dirhams.",
+      "file": "https://fnh.ma/article/actualites-marocaines/douanes-adii-circulaires-echanges-commerciaux"
+    },
+    {
+      "title": "Charte de l'investissement : 520 milliards DH engagés en trois ans",
+      "axis": "investissement",
+      "axisLabel": "Investissement",
+      "date": "2026-07",
+      "type": "Veille",
+      "excerpt": "Lors de la 11e Commission nationale des investissements, le gouvernement a annoncé la signature de 391 conventions représentant 520 milliards de dirhams depuis le lancement de la Charte de 2023, ainsi que l'approbation de 29 nouveaux projets (42 milliards DH, environ 9 800 emplois) répartis sur 16 provinces.",
+      "file": "https://aujourdhui.ma/actualite/charte-de-linvestissement-un-volume-de-520-milliards-dh-en-3-annees"
     }
   ]
 }
