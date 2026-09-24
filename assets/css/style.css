@@ -57,6 +57,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .lang-tab{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.05em;border:none;background:transparent;padding:6px 11px;cursor:pointer;color:var(--ink-soft)}
 .lang-tab.is-active{background:var(--navy);color:#fff}
 .lang-tab:disabled{cursor:default;opacity:.45}
+/* Bouton de bascule FR <-> AR (pages d'accueil) */
+.lang-btn{display:inline-flex;align-items:center;justify-content:center;min-width:84px;padding:8px 16px;border:1px solid var(--gold);border-radius:999px;background:var(--gold-tint);color:var(--navy);text-decoration:none;font-size:.95rem;font-weight:500;line-height:1.2;white-space:nowrap;transition:background .15s ease,color .15s ease}
+.lang-btn:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+.lang-btn[lang="ar"]{font-family:'IBM Plex Sans Arabic',var(--font-body);font-size:1rem}
+.lang-btn[lang="fr"]{font-family:'IBM Plex Sans',sans-serif}
 .site-logo{display:flex;align-items:center;margin-left:4px}
 .site-logo img{height:64px;width:auto}
 .back-home{display:inline-flex;align-items:center;gap:6px;font-size:.86rem;color:var(--royal);text-decoration:none;padding:18px 0 0}
@@ -97,6 +102,11 @@ section{padding:64px 0}
 .hero-aside h3{margin-bottom:12px}
 .hero-aside ul{margin:0;padding-left:18px;color:var(--ink-soft);font-size:.92rem}
 .hero-aside li{margin-bottom:8px}
+.hero-side{display:flex;flex-direction:column;gap:20px;min-width:0}
+.hero-video{margin:0;background:var(--navy-deep);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:0 10px 24px rgba(11,43,80,.12)}
+.hero-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:var(--navy-deep)}
+.hero-video figcaption{display:flex;align-items:center;gap:10px;padding:10px 14px;color:#fff;font-size:.85rem;border-top:2px solid var(--gold)}
+.hero-video-tag{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold)}
 
 /* ===== Cards (fiches) ===== */
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
@@ -256,3 +266,32 @@ canvas{max-width:100%}
   .fiche{transition:border-color .18s ease, transform .18s ease}
   .fiche:hover{transform:translateY(-2px)}
 }
+
+/* ===== Version arabe (RTL) =====
+   Activée par <html lang="ar" dir="rtl">. Polices arabes, pas d'espacement
+   entre lettres ni de majuscules (qui cassent la liaison des lettres),
+   et miroir des bordures / marges orientées. */
+[dir="rtl"]{
+  --font-display:'Noto Kufi Arabic','IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;
+  --font-body:'IBM Plex Sans Arabic','IBM Plex Sans','Segoe UI',Tahoma,-apple-system,sans-serif;
+  --font-mono:'IBM Plex Sans Arabic','IBM Plex Sans','Segoe UI',Tahoma,sans-serif;
+}
+[dir="rtl"] body{line-height:1.8}
+[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3{line-height:1.55}
+[dir="rtl"] .eyebrow,[dir="rtl"] .ticker-label,[dir="rtl"] .pub-tag,[dir="rtl"] .fiche-meta,
+[dir="rtl"] .filter-btn,[dir="rtl"] .person-role,[dir="rtl"] .pill,[dir="rtl"] .hero-video-tag,
+[dir="rtl"] .intro-skip,[dir="rtl"] .lang-tab{letter-spacing:0;text-transform:none}
+[dir="rtl"] .eyebrow{font-size:.85rem;font-weight:500}
+[dir="rtl"] .ticker-label{font-size:.78rem}
+[dir="rtl"] .ticker-note{font-size:.74rem}
+[dir="rtl"] .pub-tag{font-size:.74rem}
+[dir="rtl"] .ticker-item{border-right:none;border-left:1px dashed rgba(246,247,250,.22)}
+[dir="rtl"] .ticker-item:last-child{border-left:none}
+[dir="rtl"] .hero-aside ul{padding-left:0;padding-right:18px}
+[dir="rtl"] .site-logo{margin-left:0;margin-right:4px}
+[dir="rtl"] .note-box{border-left:none;border-right:3px solid var(--gold);border-radius:8px 0 0 8px}
+[dir="rtl"] .tab-btn{margin-right:0;margin-left:20px}
+[dir="rtl"] .chat-launcher{right:auto;left:22px}
+[dir="rtl"] .intro-overlay .intro-skip{right:auto;left:22px}
+[dir="rtl"] .chat-bubble.bot{border-bottom-left-radius:14px;border-bottom-right-radius:4px}
+[dir="rtl"] .chat-bubble.user{border-bottom-right-radius:14px;border-bottom-left-radius:4px}

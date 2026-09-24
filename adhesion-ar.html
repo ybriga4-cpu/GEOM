@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الانخراط والدعم — GEOM</title>
+<meta name="description" content="الانخراط مجاناً في GEOM بصفة فاعل اقتصادي أو باحث، أو دعم التجمّع بهبة. لا يُطلب أي اشتراك من الأعضاء.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="alternate" hreflang="fr" href="adhesion.html">
+<link rel="alternate" hreflang="ar" href="adhesion-ar.html">
+<link rel="alternate" hreflang="x-default" href="adhesion.html">
+
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="wrap"><a class="back-home" href="index-ar.html">&rarr; العودة إلى الرئيسية</a></div>
+  <section style="padding-bottom:0">
+    <div class="wrap">
+      <p class="eyebrow">الانخراط والدعم</p>
+      <h1>انضمّوا إلى GEOM</h1>
+      <p class="lede">يتوجّه GEOM إلى كل فاعل اقتصادي مغربي — صناعي، أو منعش عقاري، أو فاعل سياحي، أو مستثمر، أو مقدّم خدمات — وكذا إلى الباحثين والخبراء الراغبين في الإسهام في أعماله. والانخراط مجاني لجميع فئات الأعضاء، طبقاً للمادة 5 من نظامنا الأساسي: إذ يقوم تسيير التجمّع حصرياً على الهبات والإعانات والرعاية، بما في ذلك بالنسبة للأعضاء الفاعلين.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px" class="adhesion-grid">
+
+        <div>
+          <h2>الانخراط — مجاناً</h2>
+          <p class="lede" style="margin-bottom:20px">يدرس المكتب المسيّر طلبكم. وستتوصلون بإشعار بالتوصل، ثم بتأكيد في حالة القبول (المادة 6 من النظام الأساسي).</p>
+
+          <form class="form-card" name="adhesion" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-adhesion">
+            <input type="hidden" name="form-name" value="adhesion">
+            <p style="display:none">
+              <label>لا تملأ هذا الحقل: <input name="bot-field"></label>
+            </p>
+
+            <div class="field">
+              <label for="nom">الاسم الكامل</label>
+              <input type="text" id="nom" name="nom" required>
+            </div>
+            <div class="field">
+              <label for="email">البريد الإلكتروني</label>
+              <input type="email" id="email" name="email" dir="ltr" required>
+            </div>
+            <div class="field">
+              <label for="categorie">الفئة المطلوبة</label>
+              <select id="categorie" name="categorie">
+                <option value="operateur">عضو فاعل (مقاولة / هيئة اقتصادية)</option>
+                <option value="actif">عضو نشيط / باحث</option>
+                <option value="honneur">عضو شرفي / المجلس العلمي</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="college">الهيئة التي تنتمون إليها</label>
+              <select id="college" name="college">
+                <option value="industrie">الصناعة</option>
+                <option value="immobilier">العقار والتهيئة</option>
+                <option value="tourisme">السياحة والترفيه</option>
+                <option value="commerce">التجارة والخدمات</option>
+                <option value="investissement">الاستثمار والمالية</option>
+                <option value="tech">التكنولوجيا والابتكار</option>
+                <option value="autre">أخرى / غير قطاعية (محور بحث)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">الدوافع (اختياري)</label>
+              <textarea id="message" name="message"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">إرسال طلب الانخراط</button>
+            <p class="form-note">لن يُطلب منكم أبداً أي اشتراك، لا عند الانخراط ولا بشكل دوري.</p>
+          </form>
+        </div>
+
+        <div>
+          <h2>الدعم بهبة</h2>
+          <p class="lede" style="margin-bottom:20px">لا يتقاضى GEOM أي اشتراك من أعضائه: فالهبات والإعانات والرعاية هي المورد الوحيد الذي يتيح تمويل المنشورات والندوات والمرصد.</p>
+
+          <form class="form-card" name="don" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-don">
+            <input type="hidden" name="form-name" value="don">
+            <p style="display:none">
+              <label>لا تملأ هذا الحقل: <input name="bot-field"></label>
+            </p>
+
+            <div class="field">
+              <label for="don-nom">الاسم الكامل أو اسم الهيئة</label>
+              <input type="text" id="don-nom" name="nom" required>
+            </div>
+            <div class="field">
+              <label for="don-email">البريد الإلكتروني</label>
+              <input type="email" id="don-email" name="email" dir="ltr" required>
+            </div>
+            <div class="field">
+              <label for="don-type">نوع الدعم</label>
+              <select id="don-type" name="type">
+                <option value="don-ponctuel">هبة ظرفية</option>
+                <option value="subvention">إعانة مؤسساتية</option>
+                <option value="parrainage">رعاية منشور أو ندوة</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="don-message">توضيحات (اختياري)</label>
+              <textarea id="don-message" name="message"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">أرغب في أن يُتّصل بي بخصوص هبة</button>
+            <p class="form-note">ستُبلَّغون بالكيفيات العملية (تحويل بنكي أو وسائل أخرى) مباشرة من طرف أمين المال.</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="note-box">
+        <strong>ملاحظة ميدانية:</strong> صُمّم هذا النموذج ليعمل دون خادم خلفي، عبر الرصد التلقائي للنماذج من طرف المستضيف (Netlify). ولا تُعالَج أي معطيات من طرف خدمة خارجية غير مصرّح بها، طبقاً للقانون رقم 09.08.
+      </div>
+    </div>
+  </section>
+
+  <style>@media (max-width:820px){ .adhesion-grid{grid-template-columns:1fr !important} }</style>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/site-chrome.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المنشورات — GEOM</title>
+<meta name="description" content="دراسات GEOM ومذكراته التحليلية وإعلاناته وفيديوهاته، متاحة مجاناً.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="alternate" hreflang="fr" href="publications.html">
+<link rel="alternate" hreflang="ar" href="publications-ar.html">
+<link rel="alternate" hreflang="x-default" href="publications.html">
+
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="wrap"><a class="back-home" href="index-ar.html">&rarr; العودة إلى الرئيسية</a></div>
+  <section style="padding-bottom:0">
+    <div class="wrap">
+      <p class="eyebrow">المنشورات والموارد</p>
+      <h1>مكتبة مفتوحة للجميع</h1>
+      <p class="lede">دراسات GEOM ومذكراته التحليلية وإعلاناته وفيديوهاته — متاحة للاطلاع بحرية، دون تسجيل.</p>
+    </div>
+  </section>
+
+  <section data-tabs>
+    <div class="wrap">
+      <div class="tabs">
+        <button type="button" class="tab-btn is-active" data-tab="tab-etudes">دراسات ومذكرات</button>
+        <button type="button" class="tab-btn" data-tab="tab-annonces">إعلانات</button>
+        <button type="button" class="tab-btn" data-tab="tab-videos">فيديوهات</button>
+      </div>
+
+      <div id="tab-etudes" class="tab-panel is-active">
+        <div class="filters" data-filter-group>
+          <button type="button" class="filter-btn is-active" data-filter="all">جميع المحاور</button>
+          <button type="button" class="filter-btn" data-filter="economie">الاقتصاد</button>
+          <button type="button" class="filter-btn" data-filter="commerce">التجارة الدولية</button>
+          <button type="button" class="filter-btn" data-filter="investissement">الاستثمار</button>
+        </div>
+        <div class="pub-list" data-pub-list></div>
+      </div>
+
+      <div id="tab-annonces" class="tab-panel">
+        <div class="pub-list" data-announce-list></div>
+      </div>
+
+      <div id="tab-videos" class="tab-panel">
+        <div class="video-grid" data-video-list></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/site-chrome.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+  renderPublications('[data-pub-list]', { filterGroup: '[data-filter-group]' });
+  renderAnnouncements('[data-announce-list]');
+  renderVideos('[data-video-list]');
+  initTabs('[data-tabs]');
+</script>
+</body>
+</html>

@@ -12,17 +12,31 @@ async function loadItems(path) {
 
 function axisStampMarkup(item) {
   return `
-    <a class="fiche" href="recherche.html#${item.id}">
+    <a class="fiche" href="${UI.research}#${item.id}">
       <span class="fiche-stamp">${item.stamp}</span>
-      <h3>${item.title}</h3>
-      <p>${item.summary}</p>
-      <span class="fiche-meta">${item.expert}</span>
+      <h3>${tr(item, "title")}</h3>
+      <p>${tr(item, "summary")}</p>
+      <span class="fiche-meta">${tr(item, "expert")}</span>
     </a>`;
 }
 
+// Langue de la page (<html lang="ar"> => arabe). Les champs *_ar des JSON
+// sont utilisés s'ils existent, sinon on retombe sur le texte français.
+const IS_AR = (document.documentElement.lang || "").toLowerCase().startsWith("ar");
+const tr = (item, key) => (IS_AR && item[key + "_ar"]) || item[key];
+const UI = IS_AR
+  ? { consult: "اطّلع ←", noPubAxis: "لا توجد منشورات في هذا المحور حالياً.", noPub: "المنشورات غير متاحة حالياً.",
+      noAxes: "محاور البحث غير متاحة حالياً.", announce: "إعلان", noAnn: "لا توجد إعلانات حالياً.", annErr: "الإعلانات غير متاحة حالياً.",
+      noVid: "لا توجد فيديوهات حالياً.", vidErr: "الفيديوهات غير متاحة حالياً.", research: "recherche-ar.html" }
+  : { consult: "Consulter →", noPubAxis: "Aucune publication dans cet axe pour le moment.", noPub: "Publications indisponibles pour le moment.",
+      noAxes: "Axes de recherche indisponibles pour le moment.", announce: "Annonce", noAnn: "Aucune annonce pour le moment.", annErr: "Annonces indisponibles pour le moment.",
+      noVid: "Aucune vidéo pour le moment.", vidErr: "Vidéos indisponibles pour le moment.", research: "recherche.html" };
+
 function monthLabel(dateStr) {
   const [year, month] = dateStr.split("-");
-  const months = ["", "jan.", "fév.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
+  const months = IS_AR
+    ? ["", "يناير", "فبراير", "مارس", "أبريل", "ماي", "يونيو", "يوليوز", "غشت", "شتنبر", "أكتوبر", "نونبر", "دجنبر"]
+    : ["", "jan.", "fév.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
   return `${months[parseInt(month, 10)] || ""} ${year}`;
 }
 
@@ -31,11 +45,11 @@ function pubRowMarkup(pub) {
     <div class="pub-row" data-axis="${pub.axis}">
       <div class="pub-date">${monthLabel(pub.date)}</div>
       <div>
-        <span class="pub-tag">${pub.type} — ${pub.axisLabel}</span>
-        <h3 class="pub-title">${pub.title}</h3>
-        <p class="pub-desc">${pub.excerpt}</p>
+        <span class="pub-tag">${tr(pub, "type")} — ${tr(pub, "axisLabel")}</span>
+        <h3 class="pub-title">${tr(pub, "title")}</h3>
+        <p class="pub-desc">${tr(pub, "excerpt")}</p>
       </div>
-      <a class="pub-dl" href="${pub.file}">Consulter →</a>
+      <a class="pub-dl" href="${pub.file}">${UI.consult}</a>
     </div>`;
 }
 
@@ -44,9 +58,9 @@ function announcementMarkup(item) {
     <div class="pub-row">
       <div class="pub-date">${monthLabel(item.date)}</div>
       <div>
-        <span class="pub-tag">Annonce</span>
-        <h3 class="pub-title">${item.title}</h3>
-        <p class="pub-desc">${item.body}</p>
+        <span class="pub-tag">${UI.announce}</span>
+        <h3 class="pub-title">${tr(item, "title")}</h3>
+        <p class="pub-desc">${tr(item, "body")}</p>
       </div>
       <span></span>
     </div>`;
@@ -56,13 +70,13 @@ function videoMarkup(item) {
   const isFile = /\.(mp4|webm|mov)$/i.test(item.url || "");
   const frame = isFile
     ? `<video src="${item.url}" controls preload="metadata"></video>`
-    : `<iframe src="${item.url}" title="${item.title}" allowfullscreen loading="lazy"></iframe>`;
+    : `<iframe src="${item.url}" title="${tr(item, "title")}" allowfullscreen loading="lazy"></iframe>`;
   return `
     <div class="video-card">
       <div class="video-frame">${frame}</div>
       <div class="video-body">
-        <h3>${item.title}</h3>
-        <p>${item.description || ""}</p>
+        <h3>${tr(item, "title")}</h3>
+        <p>${tr(item, "description") || ""}</p>
       </div>
     </div>`;
 }
@@ -75,7 +89,7 @@ async function renderAxes(selector, limit) {
     if (limit) axes = axes.slice(0, limit);
     el.innerHTML = axes.map(axisStampMarkup).join("");
   } catch (e) {
-    el.innerHTML = `<p class="empty-state">Axes de recherche indisponibles pour le moment.</p>`;
+    el.innerHTML = `<p class="empty-state">${UI.noAxes}</p>`;
   }
 }
 
@@ -91,7 +105,7 @@ async function renderPublications(selector, opts = {}) {
       const filtered = filter && filter !== "all" ? pubs.filter((p) => p.axis === filter) : pubs;
       el.innerHTML = filtered.length
         ? filtered.map(pubRowMarkup).join("")
-        : `<p class="empty-state">Aucune publication dans cet axe pour le moment.</p>`;
+        : `<p class="empty-state">${UI.noPubAxis}</p>`;
     };
     draw();
 
@@ -108,7 +122,7 @@ async function renderPublications(selector, opts = {}) {
       }
     }
   } catch (e) {
-    el.innerHTML = `<p class="empty-state">Publications indisponibles pour le moment.</p>`;
+    el.innerHTML = `<p class="empty-state">${UI.noPub}</p>`;
   }
 }
 
@@ -120,9 +134,9 @@ async function renderAnnouncements(selector) {
     items.sort((a, b) => (a.date < b.date ? 1 : -1));
     el.innerHTML = items.length
       ? items.map(announcementMarkup).join("")
-      : `<p class="empty-state">Aucune annonce pour le moment.</p>`;
+      : `<p class="empty-state">${UI.noAnn}</p>`;
   } catch (e) {
-    el.innerHTML = `<p class="empty-state">Annonces indisponibles pour le moment.</p>`;
+    el.innerHTML = `<p class="empty-state">${UI.annErr}</p>`;
   }
 }
 
@@ -134,9 +148,9 @@ async function renderVideos(selector) {
     items.sort((a, b) => (a.date < b.date ? 1 : -1));
     el.innerHTML = items.length
       ? items.map(videoMarkup).join("")
-      : `<p class="empty-state">Aucune vidéo pour le moment.</p>`;
+      : `<p class="empty-state">${UI.noVid}</p>`;
   } catch (e) {
-    el.innerHTML = `<p class="empty-state">Vidéos indisponibles pour le moment.</p>`;
+    el.innerHTML = `<p class="empty-state">${UI.vidErr}</p>`;
   }
 }
 

@@ -7,6 +7,14 @@
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,'0');
 
+// ── Bilingue FR / AR ──
+// La page arabe (<html lang="ar">) charge assets/js/observatoire-ar.js avant ce script.
+const OBS_AR  = (document.documentElement.lang || '').toLowerCase().startsWith('ar');
+const OBS_LOC = OBS_AR ? 'ar-MA' : 'fr-FR';
+const OBS_DICT = (OBS_AR && window.OBS_AR_DICT) || {};
+const tx = s => (typeof s === 'string' && OBS_DICT[s]) || s;
+const trArr = (arr, keys) => arr.forEach(o => keys.forEach(k => { o[k] = tx(o[k]); }));
+
 // ═══════════════════════════════════════════
 // ── NAVIGATION PAR VUES ──
 // ═══════════════════════════════════════════
@@ -61,9 +69,9 @@ function setView(view, btn) {
 // ═══════════════════════════════════════════
 function updateTime() {
   const n = new Date();
-  $('mdate').textContent = n.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  $('mdate').textContent = n.toLocaleDateString(OBS_LOC,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
   $('utc').textContent = 'UTC '+pad(n.getUTCHours())+':'+pad(n.getUTCMinutes())+':'+pad(n.getUTCSeconds());
-  $('ftime') && ($('ftime').textContent = n.toLocaleString('fr-FR'));
+  $('ftime') && ($('ftime').textContent = n.toLocaleString(OBS_LOC));
 }
 updateTime(); setInterval(updateTime, 1000);
 
@@ -75,13 +83,14 @@ const CITIES = [
   {c:'Tokyo',tz:'Asia/Tokyo'},{c:'New York',tz:'America/New_York'},
   {c:'São Paulo',tz:'America/Sao_Paulo'},
 ];
+trArr(CITIES, ['c']);
 function renderClocks() {
   const n = new Date();
   $('clocks').innerHTML = CITIES.map(ct => {
     try {
-      const t = n.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:ct.tz});
-      const tz = n.toLocaleTimeString('fr-FR',{timeZoneName:'short',timeZone:ct.tz}).split(' ').pop();
-      const h = parseInt(n.toLocaleString('fr-FR',{hour:'2-digit',hour12:false,timeZone:ct.tz}));
+      const t = n.toLocaleTimeString(OBS_LOC,{hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:ct.tz});
+      const tz = n.toLocaleTimeString(OBS_LOC,{timeZoneName:'short',timeZone:ct.tz}).split(' ').pop();
+      const h = parseInt(n.toLocaleString(OBS_LOC,{hour:'2-digit',hour12:false,timeZone:ct.tz}));
       const ico = h<6||h>=22?'🌙':h<12?'🌅':'☀️';
       return `<div class="clock${ct.me?' me':''}" title="${ct.tz}">
         <div class="ck-city">${ct.c}</div>
@@ -105,6 +114,7 @@ const ALERTS = [
   'Conflit Ukraine : nouvelle offensive russe dans le Donetsk — OTAN en réunion d\'urgence à Bruxelles · Réponse diplomatique attendue',
   'Or historique : 3 312 $/oz — valeur refuge portée par incertitudes géopolitiques et achats des banques centrales émergentes',
 ];
+ALERTS.forEach((a, i) => { ALERTS[i] = tx(a); });
 let ai = 0;
 $('alertTxt').textContent = ALERTS[0];
 function nextAlert() {
@@ -134,7 +144,7 @@ let FX_DATA = [
 async function fetchForexFrankfurter() {
   try {
     $('fxApiTag').className = 'api-tag api-sim';
-    $('fxApiTag').textContent = 'Chargement…';
+    $('fxApiTag').textContent = tx('Chargement…');
     const res = await fetch('https://api.frankfurter.app/latest?from=EUR&to=USD,GBP,JPY,CHF,CNY,MAD');
     if (!res.ok) throw new Error('HTTP '+res.status);
     const data = await res.json();
@@ -154,7 +164,7 @@ async function fetchForexFrankfurter() {
   } catch(e) {
     console.warn('Frankfurter API indisponible:', e.message);
     $('fxApiTag').className = 'api-tag api-err';
-    $('fxApiTag').textContent = 'API hors ligne';
+    $('fxApiTag').textContent = tx('API hors ligne');
     renderFX();
     return false;
   }
@@ -197,10 +207,11 @@ let COMMO = [
   {ico:'🍫',n:'Cacao',u:'$/t',p:9840,c:'+1.94%',v:1.94,up:true,pct:96},
   {ico:'⚡',n:'Aluminium',u:'$/t',p:2442,c:'+0.28%',v:0.28,up:true,pct:64},
 ];
+trArr(COMMO, ['n']);
 
 function renderCommo() {
   $('commoBody').innerHTML = COMMO.map(c => {
-    const disp = c.p >= 1000 ? c.p.toLocaleString('fr-FR') : c.p.toFixed(2);
+    const disp = c.p >= 1000 ? c.p.toLocaleString(OBS_LOC) : c.p.toFixed(2);
     return `<div class="commo">
       <span class="commo-ico">${c.ico}</span>
       <div style="flex:1;min-width:0"><div class="commo-name">${c.n}</div><div class="commo-unit">${c.u}</div></div>
@@ -224,6 +235,7 @@ let IDX = [
   {f:'🇨🇳',n:'CSI 300',s:'Shanghai',v:3218,c:'-0.42%',up:false,pts:[-0.1,-0.4,-0.2,-0.5,-0.3,-0.4,-0.42]},
   {f:'🇬🇧',n:'FTSE 100',s:'Londres',v:8124,c:'+0.18%',up:true,pts:[0.1,0.2,0.3,0.1,0.2,0.1,0.18]},
 ];
+trArr(IDX, ['s']);
 
 function iSpark(pts, up) {
   const mn = Math.min(...pts), mx = Math.max(...pts), r = mx-mn||1;
@@ -237,7 +249,7 @@ function renderIdx() {
       <span class="idx-flag">${d.f}</span>
       <div><div class="idx-name">${d.n}</div><div class="idx-sub">${d.s}</div></div>
       ${iSpark(d.pts, d.up)}
-      <div><div class="idx-val ${d.up?'up':'dn'}">${d.v.toLocaleString('fr-FR')}</div><div class="idx-chg ${d.up?'up':'dn'}">${d.up?'▲':'▼'} ${d.c}</div></div>
+      <div><div class="idx-val ${d.up?'up':'dn'}">${d.v.toLocaleString(OBS_LOC)}</div><div class="idx-chg ${d.up?'up':'dn'}">${d.up?'▲':'▼'} ${d.c}</div></div>
     </div>`).join('');
 }
 
@@ -265,6 +277,7 @@ function buildTicker() {
     {s:'OR',v:'3 312$/oz',up:true,c:'+0.88%'},
     {s:'DXY',v:'104.8',up:true,c:'+0.18%'},
   ];
+  trArr(items, ['s']);
   const th = items.map(t => `<span class="ti"><span class="ti-sym">${t.s}</span><span class="ti-val">${t.v}</span><span class="${t.up?'ti-up':'ti-dn'}">${t.c}</span></span>`).join('');
   $('ticker').innerHTML = th + th;
 }
@@ -284,7 +297,8 @@ const ZONES = [
   {id:'coree',sev:'watch',n:'Corée du Nord',d:'Essais balistiques ICBM. Rapprochement Pyongyang-Moscou. Transfert d\'armements. AIEA exclue.',tag:'Prolifération nucléaire'},
   {id:'iran',sev:'watch',n:'Iran · Programme nucléaire',d:'Enrichissement à 60%. JCPOA mort. Tensions Israël-Iran. Proxies actifs Gaza/Yémen/Irak.',tag:'Nucléaire · Proxies'},
 ];
-const SC = {war:['var(--red)','CONFLIT ACTIF'],tension:['var(--amber)','TENSION'],watch:['var(--blue)','SURVEILLANCE']};
+const SC = {war:['var(--red)',tx('CONFLIT ACTIF')],tension:['var(--amber)',tx('TENSION')],watch:['var(--blue)',tx('SURVEILLANCE')]};
+trArr(ZONES, ['n','d','tag']);
 
 $('zonePanel').innerHTML = ZONES.map(z => `
   <div class="zone-item" onclick="highlightZone('${z.id}')">
@@ -303,7 +317,9 @@ $('zonePanel').innerHTML = ZONES.map(z => `
 const now = new Date();
 function minsAgo(m) {
   const d = new Date(now - m*60000);
-  return d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}) + ` (il y a ${m < 60 ? m+'min' : Math.floor(m/60)+'h'+(m%60?String(m%60).padStart(2,'0'):'')})`;
+  const hh = d.toLocaleTimeString(OBS_LOC,{hour:'2-digit',minute:'2-digit'});
+  if (OBS_AR) return hh + ` (منذ ${m < 60 ? m+' د' : Math.floor(m/60)+' س'+(m%60?' '+(m%60)+' د':'')})`;
+  return hh + ` (il y a ${m < 60 ? m+'min' : Math.floor(m/60)+'h'+(m%60?String(m%60).padStart(2,'0'):'')})`;
 }
 
 const EVS = [
@@ -320,6 +336,7 @@ const EVS = [
   {t:minsAgo(420),cat:'cg',cl:'Géopo.',ti:'ONU : rapport Soudan — 8,5 millions de déplacés, pire crise humanitaire depuis le Rwanda',src:'OCHA · MSF'},
   {t:minsAgo(480),cat:'cn',cl:'Énergie',ti:'IEA : demande mondiale de pétrole revue à la hausse à 102,4 Mb/j pour 2026 — regain Asie',src:'AIE · Bloomberg'},
 ];
+trArr(EVS, ['cl','ti']);
 
 function renderEvents() {
   $('evList').innerHTML = EVS.map(e => `
@@ -328,7 +345,7 @@ function renderEvents() {
       <span class="ev-cat ${e.cat}">${e.cl}</span>
       <div>
         <div class="ev-title">${e.ti}</div>
-        <div class="ev-src">Sources : ${e.src}</div>
+        <div class="ev-src">${tx('Sources : ')}<bdi dir="ltr">${e.src}</bdi></div>
       </div>
     </div>`).join('');
 }
@@ -368,6 +385,7 @@ const BARO = [
   {l:'Stabilité politique',v:42,c:'var(--blue)'},
 ];
 function baroHtml(items) {
+  trArr(items, ['l']);
   return items.map(b => `
     <div class="baro">
       <div class="baro-lbl">${b.l}</div>
@@ -412,6 +430,7 @@ const MACRO = [
   {l:'Indice Dollar DXY',v:'104.8',up:true},
   {l:'PIB Maroc 2026 (prév.)',v:'+4.1%',up:true},
 ];
+trArr(MACRO, ['l','v']);
 $('macroBody').innerHTML = MACRO.map(m => `
   <div class="macro-row">
     <div class="macro-lbl">${m.l}</div>
@@ -429,6 +448,7 @@ const ENERGY_ITEMS = [
   {ico:'☢️',n:'Uranium',u:'$/lb',v:91.50,c:'+1.20%',up:true},
   {ico:'⚡',n:'Électricité EU',u:'€/MWh',v:82.40,c:'-1.10%',up:false},
 ];
+trArr(ENERGY_ITEMS, ['n']);
 $('energyGrid') && ($('energyGrid').innerHTML = ENERGY_ITEMS.map(e => `
   <div class="en-card">
     <div class="en-ico">${e.ico}</div>
@@ -443,6 +463,7 @@ const ENERGY_GEO = [
   {l:'Détroit d\'Ormuz trafic/jour',v:'21 Mb/j',up:null},{l:'Gazprom revenus (-)',v:'-62%',up:false},
   {l:'GNL Qatar vers Asie',v:'+12%',up:true},{l:'Câbles sous-marins incidents',v:'4 en 2026',up:false},
 ];
+trArr(ENERGY_GEO, ['l','v']);
 $('energyGeoBody') && ($('energyGeoBody').innerHTML = ENERGY_GEO.map(m => `
   <div class="macro-row">
     <div class="macro-lbl">${m.l}</div>
@@ -454,6 +475,7 @@ const RENEW = [
   {l:'Éolien offshore',v:'280 GW',up:true},{l:'Hydrogène vert (prod.)',v:'28 Mt/an',up:true},
   {l:'Stockage batteries (GWh)',v:'480 GWh',up:true},{l:'Investissement ENR 2026',v:'$820 Mds',up:true},
 ];
+trArr(RENEW, ['l','v']);
 $('renewBody') && ($('renewBody').innerHTML = RENEW.map(m => `
   <div class="macro-row">
     <div class="macro-lbl">${m.l}</div>
@@ -480,6 +502,7 @@ const CLIMATE_ALERTS = [
   {sev:'med',sl:'ÉLEVÉ',ico:'🔥',ti:'Feux forêt Canada-Alberta',d:'180 000 ha brûlés depuis janvier. Saison 40% plus tôt que la normale. 12 000 évacués.'},
   {sev:'low',sl:'VIGILANCE',ico:'❄️',ti:'Vague de froid tardive — Asie centrale',d:'Températures -25°C en mai dans certaines zones. Impact agriculture précoce Kazakhstan.'},
 ];
+trArr(CLIMATE_ALERTS, ['sl','ti','d']);
 $('climateAlerts') && ($('climateAlerts').innerHTML = CLIMATE_ALERTS.map(a => `
   <div class="clim-alert">
     <span class="clim-sev ${a.sev}">${a.sl}</span>
@@ -494,6 +517,7 @@ const CLIM_STATS = [
   {l:'Fonte glaces Antarctique',v:'-18%',up:false},{l:'Niveau mer (mm/an)',v:'+4.8 mm',up:false},
   {l:'Acidification océan pH',v:'8.04',up:false},{l:'Albédo Arctique (perte)',v:'-12%',up:false},
 ];
+trArr(CLIM_STATS, ['l','v']);
 $('climateStats') && ($('climateStats').innerHTML = CLIM_STATS.map(m => `
   <div class="macro-row">
     <div class="macro-lbl">${m.l}</div>
@@ -505,6 +529,7 @@ const CLIM_ECO = [
   {l:'PIB exposé risque côtier',v:'4.5% mondial',up:null},{l:'Coût adaptation 2030 (besoin)',v:'$400 Mds',up:null},
   {l:'Financement vert mobilisé',v:'$180 Mds',up:true},{l:'Gap de financement',v:'-$220 Mds',up:false},
 ];
+trArr(CLIM_ECO, ['l','v']);
 $('climEcoBody') && ($('climEcoBody').innerHTML = CLIM_ECO.map(m => `
   <div class="macro-row">
     <div class="macro-lbl">${m.l}</div>
@@ -573,9 +598,9 @@ async function buildMap() {
       if(x>0&&x<W&&y>0&&y<H){
         const t=document.createElementNS(ns,'text');
         t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('text-anchor','middle');
-        t.setAttribute('font-family',"'JetBrains Mono'");t.setAttribute('font-size',W<700?'7':'9');
+        t.setAttribute('font-family',OBS_AR?"'IBM Plex Sans Arabic',sans-serif":"'JetBrains Mono'");t.setAttribute('font-size',W<700?'7':'9');
         t.setAttribute('fill','#5890B0');t.setAttribute('font-style','italic');t.setAttribute('opacity','0.85');
-        t.textContent=lbl;svg.appendChild(t);
+        t.textContent=tx(lbl);svg.appendChild(t);
       }
     });
     const gMarkers=document.createElementNS(ns,'g');
@@ -616,7 +641,7 @@ async function buildMap() {
     $('mapLoading').style.display='none';
   } catch(e) {
     console.error('Carte:',e);
-    $('mapLoading').textContent='Carte non disponible — connexion requise';
+    $('mapLoading').textContent=tx('Carte non disponible — connexion requise');
   }
 }
 
@@ -691,16 +716,16 @@ setInterval(renderIdx, 30000);
 async function refreshAllData() {
   const btn = $('liveBtn');
   btn.classList.add('loading');
-  btn.textContent = 'Actualisation…';
-  $('updBadge').textContent = 'Mise à jour…';
+  btn.textContent = tx('Actualisation…');
+  $('updBadge').textContent = tx('Mise à jour…');
   await fetchForexFrankfurter();
   renderCommo();
   renderIdx();
   buildTicker();
   const now = new Date();
-  $('updBadge').textContent = 'MAJ ' + now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  $('updBadge').textContent = tx('MAJ ') + now.toLocaleTimeString(OBS_LOC,{hour:'2-digit',minute:'2-digit'});
   btn.classList.remove('loading');
-  btn.textContent = 'EN DIRECT';
+  btn.textContent = tx('EN DIRECT');
 }
 
 // ═══════════════════════════════════════════
@@ -716,7 +741,7 @@ async function init() {
   // Then fetch live forex
   const ok = await fetchForexFrankfurter();
   const n = new Date();
-  $('updBadge').textContent = (ok ? '● BCE ' : '⚠ ') + n.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  $('updBadge').textContent = (ok ? '● BCE ' : '⚠ ') + n.toLocaleTimeString(OBS_LOC,{hour:'2-digit',minute:'2-digit'});
   renderFX(); // re-render with live data
   buildTicker();
 }

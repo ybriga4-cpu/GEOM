@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مساعد الأسئلة الشائعة — GEOM</title>
+<meta name="description" content="مساعد آلي يجيب عن الأسئلة الأكثر تداولاً حول GEOM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="alternate" hreflang="fr" href="chat.html">
+<link rel="alternate" hreflang="ar" href="chat-ar.html">
+<link rel="alternate" hreflang="x-default" href="chat.html">
+
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="wrap"><a class="back-home" href="index-ar.html">&rarr; العودة إلى الرئيسية</a></div>
+  <section style="padding-bottom:0">
+    <div class="wrap">
+      <p class="eyebrow">المساعد</p>
+      <h1>مساعد الأسئلة الشائعة لـ GEOM</h1>
+      <p class="lede">مساعد آلي، دون خادم خلفي، يجيب عن الأسئلة الأكثر تداولاً. ولكل ما عدا ذلك، يُرجى المرور عبر <a href="contact-ar.html">صندوق الرسائل</a> — وسيجيبكم أحد أعضاء المكتب.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="chat-shell">
+        <div class="chat-head">
+          <h3>مساعد GEOM</h3>
+          <p>أجوبة آلية — ليست محادثة مع شخص</p>
+        </div>
+        <div class="chat-log" data-chat-log></div>
+        <div class="chat-chips" data-chat-chips></div>
+        <form class="field" data-chat-form style="padding:0 20px 20px;margin:0;display:flex;gap:10px">
+          <input type="text" data-chat-input placeholder="اكتبوا سؤالكم…" aria-label="سؤالكم" style="flex:1">
+          <button class="btn btn-primary" type="submit">إرسال</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/site-chrome.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الفريق — GEOM</title>
+<meta name="description" content="المكتب المسيّر وأعضاء مجلس GEOM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="alternate" hreflang="fr" href="equipe.html">
+<link rel="alternate" hreflang="ar" href="equipe-ar.html">
+<link rel="alternate" hreflang="x-default" href="equipe.html">
+<style>
+  /* --- Ajouts page Équipe : photo, popup résumé, placeholders --- */
+  .person-avatar-photo{
+    width:72px;height:72px;border-radius:50%;overflow:hidden;flex-shrink:0;
+    background:#eee;
+  }
+  .person-avatar-photo img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .person{ display:flex; gap:20px; align-items:flex-start; margin-bottom:28px; }
+  .person-placeholder{
+    border:1px dashed #c9c9c9; border-radius:10px; padding:16px 20px;
+    opacity:0.85;
+  }
+  .person-placeholder .person-avatar{
+    background:#f2f2f2; color:#9a9a9a; display:flex; align-items:center; justify-content:center;
+    width:72px; height:72px; border-radius:50%; font-family:'IBM Plex Mono', monospace; font-size:.8rem;
+    flex-shrink:0;
+  }
+  .council-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr));
+    gap:20px; margin-top:8px;
+  }
+  .council-grid .person-placeholder{ margin-bottom:0; }
+  .council-grid .person{ flex-direction:column; align-items:center; text-align:center; gap:10px; margin-bottom:0; }
+
+  .link-button{
+    background:none; border:none; padding:0; margin-top:8px;
+    font-family:'IBM Plex Sans', sans-serif; font-size:.92rem;
+    color:#0B2B50; text-decoration:underline; cursor:pointer;
+  }
+  .link-button:hover{ color:#C9A24A; }
+
+  .modal-overlay{
+    display:none; position:fixed; inset:0; background:rgba(11,43,80,0.55);
+    align-items:center; justify-content:center; padding:20px; z-index:1000;
+  }
+  .modal-overlay.is-open{ display:flex; }
+  .modal-box{
+    background:#fff; max-width:680px; width:100%; max-height:85vh; overflow-y:auto;
+    border-radius:12px; padding:32px 36px; position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal-close{
+    position:absolute; top:14px; right:18px; background:none; border:none;
+    font-size:1.6rem; line-height:1; cursor:pointer; color:#555;
+  }
+  .modal-close:hover{ color:#0B2B50; }
+  .modal-box h2{
+    font-family:'Fraunces', serif; color:#0B2B50; margin-top:0; margin-bottom:18px;
+    font-size:1.35rem; padding-right:24px;
+  }
+  .modal-body h3{
+    font-family:'Fraunces', serif; font-size:1rem; color:#C9A24A;
+    margin:22px 0 6px;
+  }
+  .modal-body h3:first-child{ margin-top:0; }
+  .modal-body p{ margin:0 0 10px; line-height:1.55; }
+  .modal-body ul{ margin:0 0 14px; padding-left:20px; }
+  .modal-body li{ margin-bottom:4px; line-height:1.5; }
+  .modal-body .job{ font-weight:600; }
+  .modal-body .period{ font-family:'IBM Plex Mono', monospace; font-size:.8rem; color:#888; display:block; margin-bottom:6px; }
+</style>
+<style>
+  /* Ajustements RTL de la page Équipe */
+  [dir="rtl"] .modal-close{ right:auto; left:18px; }
+  [dir="rtl"] .modal-box h2{ padding-right:0; padding-left:24px; font-family:var(--font-display); line-height:1.5; }
+  [dir="rtl"] .modal-body h3{ font-family:var(--font-display); }
+  [dir="rtl"] .modal-body ul{ padding-left:0; padding-right:20px; }
+  [dir="rtl"] .modal-body p,[dir="rtl"] .modal-body li{ line-height:1.8; }
+  [dir="rtl"] .link-button{ font-family:var(--font-body); }
+  [dir="rtl"] .person-placeholder .person-avatar{ font-family:var(--font-body); }
+</style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="wrap"><a class="back-home" href="index-ar.html">&rarr; العودة إلى الرئيسية</a></div>
+  <section style="padding-bottom:0">
+    <div class="wrap">
+      <p class="eyebrow">الفريق</p>
+      <h1>المكتب المسيّر وأعضاء المجلس</h1>
+      <p class="lede">يسيّر GEOM مكتبٌ مسيّر مصغّر، ويستند إلى أعضاء المجلس، وهم خبراء مستقلون يصادقون على توجهات البحث وعلى المنشورات. وتُعرض تفاصيل الحكامة الموسّعة (الجمع العام، الهيئات القطاعية) في صفحة <a href="missions-ar.html">المهام والهيكلة</a>.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>المكتب المسيّر</h2>
+
+      <div class="person">
+        <div class="person-avatar-photo">
+          <img src="assets/img/adam-fassil.png" alt="آدم فاسيل، الرئيس المؤسس لـ GEOM">
+        </div>
+        <div>
+          <h3>Adam FASSIL <span style="font-weight:500">— آدم فاسيل</span></h3>
+          <span class="person-role">الرئيس المؤسس</span>
+          <p>مسؤول عن التسيير العلمي والمعنوي والإداري للجمعية.</p>
+          <button type="button" class="link-button" onclick="document.getElementById('modal-fassil').classList.add('is-open')">
+            الملخص المهني
+          </button>
+        </div>
+      </div>
+
+      <div class="person person-placeholder">
+        <div class="person-avatar">ن ر</div>
+        <div>
+          <h3>نائب الرئيس</h3>
+          <span class="person-role">منصب شاغر</span>
+          <p>مقعد مخصص لنائب رئيس المكتب المسيّر.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <h2>المكتب المسيّر</h2>
+      <p class="eyebrow" style="margin-top:4px">الجهاز التنفيذي</p>
+      <p class="lede" style="margin-bottom:24px">يتولّى التسيير المعنوي والإداري والمالي للتجمّع بين دورتين للجمع العام.</p>
+
+      <div class="council-grid">
+        <div class="person person-placeholder">
+          <div class="person-avatar">1</div>
+          <div>
+            <h3 style="font-size:.95rem">عضو المجلس</h3>
+            <span class="person-role">منصب شاغر</span>
+          </div>
+        </div>
+        <div class="person person-placeholder">
+          <div class="person-avatar">2</div>
+          <div>
+            <h3 style="font-size:.95rem">عضو المجلس</h3>
+            <span class="person-role">منصب شاغر</span>
+          </div>
+        </div>
+        <div class="person person-placeholder">
+          <div class="person-avatar">3</div>
+          <div>
+            <h3 style="font-size:.95rem">عضو المجلس</h3>
+            <span class="person-role">منصب شاغر</span>
+          </div>
+        </div>
+        <div class="person person-placeholder">
+          <div class="person-avatar">4</div>
+          <div>
+            <h3 style="font-size:.95rem">عضو المجلس</h3>
+            <span class="person-role">منصب شاغر</span>
+          </div>
+        </div>
+        <div class="person person-placeholder">
+          <div class="person-avatar">5</div>
+          <div>
+            <h3 style="font-size:.95rem">عضو المجلس</h3>
+            <span class="person-role">منصب شاغر</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="note-box">
+        <strong>هل أنتم فاعلون اقتصاديون أو باحثون أو خبراء؟</strong> يرحّب GEOM بأعضاء جدد: أعضاء فاعلين (حسب الهيئة)، وأعضاء نشيطين، وأعضاء في المجلس. الانخراط مجاني — انظر صفحة <a href="adhesion-ar.html">الانخراط</a>.
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/site-chrome.js"></script>
+<script src="assets/js/main.js"></script>
+<!-- Popup — الملخص المهني لآدم فاسيل -->
+<div id="modal-fassil" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-fassil-title">
+  <div class="modal-box">
+    <button type="button" class="modal-close" aria-label="إغلاق" onclick="document.getElementById('modal-fassil').classList.remove('is-open')">&times;</button>
+    <h2 id="modal-fassil-title">الملخص المهني — آدم فاسيل</h2>
+    <div class="modal-body">
+
+      <p>آدم فاسيل مسيّر في مجال التكنولوجيا، ومقاول ومستثمر، راكم أكثر من 35 سنة من الخبرة الدولية بين الولايات المتحدة الأمريكية والمغرب. بنى مساره المهني في قطاع التكنولوجيا الأمريكي، بكاليفورنيا وأريزونا، قبل أن يوسّع مجال نشاطه ليشمل الاستثمار الفندقي والعقاري بالمغرب، حيث يقيم حالياً. ويواصل بالموازاة مع ذلك مواكبة مؤسسات تكنولوجية بصفته مستشاراً تنفيذياً.</p>
+
+      <p>يتميّز مساره بكفاءة مزدوجة: تمكّن تقني اكتسبه داخل مؤسسات أمريكية كبرى، وقدرة مقاولاتية أثبتها في إحداث مشاريع استثمارية وتمويلها وتدبيرها العملياتي، لا سيما في قطاعي الفندقة والعقار بالمغرب.</p>
+
+      <h3>المسار المهني</h3>
+
+      <p class="job">مستشار تنفيذي — SoftPoint، سكوتسديل (أريزونا، الولايات المتحدة)</p>
+      <span class="period">المنصب الحالي</span>
+      <ul>
+        <li>استشارة تنفيذية ومواكبة استراتيجية رفيعة المستوى</li>
+        <li>تقديم المشورة لفرق الإدارة في مجالات النمو والنجاعة العملياتية والمبادرات التكنولوجية</li>
+        <li>دعم التطوير التجاري والعلاقة مع الزبناء والتخطيط الاستراتيجي</li>
+        <li>ملاءمة الاستثمارات التكنولوجية مع الأهداف بعيدة المدى للمؤسسات</li>
+      </ul>
+
+      <p class="job">مقاول ومستثمر — المغرب</p>
+      <span class="period"><bdi dir="ltr">2000</bdi> – إلى اليوم</span>
+      <ul>
+        <li>تطوير وتدبير استثمارات في الفندقة والسياحة والعقار</li>
+        <li>اقتناء وتجديد واستغلال عقارات فندقية وأصول عقارية</li>
+        <li>قيادة التخطيط والتمويل والتدبير العملياتي للمشاريع الاستثمارية</li>
+        <li>نسج علاقات استراتيجية مع المستثمرين ومقاولي البناء ومهنيي الفندقة</li>
+        <li>الإشراف على التطوير العقاري وتدبير الأصول</li>
+      </ul>
+
+      <p class="job">شريك ومسيّر مقاولة — Technology Ventures، سان فرانسيسكو وسكوتسديل (الولايات المتحدة)</p>
+      <ul>
+        <li>المشاركة في تأسيس مقاولات تكنولوجية والشراكة فيها</li>
+        <li>الإسهام في توسيع العمليات داخل أسواق أمريكية تنافسية</li>
+        <li>قيادة التخطيط الاستراتيجي واستقطاب الزبناء والتطوير التجاري</li>
+        <li>بناء شراكات أسهمت في نمو ملموس وحضور دائم في السوق</li>
+      </ul>
+
+      <p class="job">مستشار ومهام تنفيذية في التكنولوجيا — الولايات المتحدة (IBM، HIS، MAI – مقاطعة أورانج، كاليفورنيا)</p>
+      <ul>
+        <li>المشاركة في مشاريع مؤسساتية للتكنولوجيا وحلول الأعمال (IBM)</li>
+        <li>مواكبة كبار الزبناء في تنزيل الأنظمة والمبادرات التكنولوجية</li>
+        <li>الإسهام في تحسين النجاعة العملياتية عبر التكنولوجيا (HIS)</li>
+        <li>مشاريع أنظمة تكنولوجية وتدبيرية لخدمة حاجيات الزبناء والمؤسسات (MAI)</li>
+      </ul>
+
+      <p class="job">بداية المسار — قطاع الفندقة</p>
+      <ul>
+        <li>عمل بدوام جزئي في الفندقة خلال الدراسات العليا</li>
+        <li>تطوير كفاءات في خدمة الزبناء والتدبير العملياتي والتسيير</li>
+      </ul>
+
+      <h3>التكوين</h3>
+      <ul>
+        <li>جامعة مراكش (المغرب) — دراسات جامعية</li>
+        <li>Berkeley Extension، بيركلي (كاليفورنيا، الولايات المتحدة) — دراسات متقدمة في الأعمال والتكنولوجيا</li>
+      </ul>
+
+      <h3>اللغات</h3>
+      <p>العربية · الإنجليزية · الفرنسية · الإسبانية</p>
+
+      <h3>محطات مقاولاتية بارزة</h3>
+      <ul>
+        <li>بناء مسار دولي ناجح بين المغرب والولايات المتحدة</li>
+        <li>المشاركة في نمو مقاولات تكنولوجية بكاليفورنيا وأريزونا</li>
+        <li>الانتقال من مسار مسيّر في التكنولوجيا إلى الاستثمار الفندقي والعقاري</li>
+        <li>تدبير وتطوير مشاريع استثمارية بعيدة المدى بالمغرب</li>
+        <li>مواصلة دور الاستشارة الاستراتيجية لفائدة المقاولات عبر الاستشارة التنفيذية</li>
+      </ul>
+
+    </div>
+  </div>
+</div>
+<script>
+  // إغلاق النافذة بالنقر خارجها أو بزر Échap
+  document.getElementById('modal-fassil').addEventListener('click', function(e){
+    if(e.target === this){ this.classList.remove('is-open'); }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ document.getElementById('modal-fassil').classList.remove('is-open'); }
+  });
+</script>
+</body>
+</html>

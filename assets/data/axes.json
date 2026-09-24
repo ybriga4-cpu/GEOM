@@ -5,21 +5,30 @@
       "stamp": "01",
       "title": "Économie",
       "summary": "Fiscalité, politiques publiques et dynamiques macroéconomiques marocaines.",
-      "expert": "Référent : Conseil Scientifique — à désigner"
+      "expert": "Référent : Conseil Scientifique — à désigner",
+      "title_ar": "الاقتصاد",
+      "summary_ar": "الجبايات والسياسات العمومية والديناميات الماكرو-اقتصادية المغربية.",
+      "expert_ar": "المرجع: المجلس العلمي — سيُعيَّن لاحقاً"
     },
     {
       "id": "commerce",
       "stamp": "02",
       "title": "Commerce international",
       "summary": "Accords de libre-échange, douanes, chaînes logistiques et compétitivité à l'export.",
-      "expert": "Référent : Conseil Scientifique — à désigner"
+      "expert": "Référent : Conseil Scientifique — à désigner",
+      "title_ar": "التجارة الدولية",
+      "summary_ar": "اتفاقيات التبادل الحر، والجمارك، وسلاسل الإمداد، والتنافسية في التصدير.",
+      "expert_ar": "المرجع: المجلس العلمي — سيُعيَّن لاحقاً"
     },
     {
       "id": "investissement",
       "stamp": "03",
       "title": "Investissement",
       "summary": "Financement de projets, Charte de l'investissement 2023 et attractivité territoriale.",
-      "expert": "Référent : Conseil Scientifique — à désigner"
+      "expert": "Référent : Conseil Scientifique — à désigner",
+      "title_ar": "الاستثمار",
+      "summary_ar": "تمويل المشاريع، وميثاق الاستثمار 2023، والجاذبية الترابية.",
+      "expert_ar": "المرجع: المجلس العلمي — سيُعيَّن لاحقاً"
     }
   ]
 }

@@ -7,7 +7,11 @@
       "date": "2026-09",
       "type": "Veille",
       "excerpt": "La trajectoire de convergence de l'impôt sur les sociétés engagée depuis 2023 arrive à son terme : taux standard à 20% jusqu'à 100 millions DH de bénéfice net (35% au-delà), et taux plafonné à 40% pour les banques et assurances.",
-      "file": "https://www.aafir.ma/evolution-des-taux-de-limpot-sur-les-societes-is-au-maroc-de-2023-a-2026/"
+      "file": "https://www.aafir.ma/evolution-des-taux-de-limpot-sur-les-societes-is-au-maroc-de-2023-a-2026/",
+      "title_ar": "الضريبة على الشركات 2026: سُلَّم مستقر بعد أربع سنوات من الإصلاح",
+      "excerpt_ar": "بلغ مسار تقارب الضريبة على الشركات، الذي انطلق منذ 2023، نهايته: سعر عادي بنسبة 20% إلى غاية 100 مليون درهم من الربح الصافي (35% فيما يتجاوز ذلك)، وسعر أقصى بنسبة 40% بالنسبة للبنوك وشركات التأمين.",
+      "axisLabel_ar": "الاقتصاد",
+      "type_ar": "رصد"
     },
     {
       "title": "L'ADII publie 21 nouvelles circulaires pour le 2e trimestre 2026",
@@ -16,7 +20,11 @@
       "date": "2026-07",
       "type": "Veille",
       "excerpt": "Les nouveaux textes couvrent la classification tarifaire (dispositifs médicaux, robots dotés d'IA, équipements industriels) et les régimes MRE, avec un relèvement du seuil de franchise douanière au retour définitif de 30 000 à 40 000 dirhams.",
-      "file": "https://fnh.ma/article/actualites-marocaines/douanes-adii-circulaires-echanges-commerciaux"
+      "file": "https://fnh.ma/article/actualites-marocaines/douanes-adii-circulaires-echanges-commerciaux",
+      "title_ar": "إدارة الجمارك تنشر 21 دورية جديدة برسم الفصل الثاني من 2026",
+      "excerpt_ar": "تغطي النصوص الجديدة التصنيف التعريفي (الأجهزة الطبية، الروبوتات المزوّدة بالذكاء الاصطناعي، المعدات الصناعية) والأنظمة الخاصة بمغاربة العالم، مع رفع سقف الإعفاء الجمركي عند العودة النهائية من 30.000 إلى 40.000 درهم.",
+      "axisLabel_ar": "التجارة الدولية",
+      "type_ar": "رصد"
     },
     {
       "title": "Charte de l'investissement : 520 milliards DH engagés en trois ans",
@@ -25,7 +33,11 @@
       "date": "2026-07",
       "type": "Veille",
       "excerpt": "Lors de la 11e Commission nationale des investissements, le gouvernement a annoncé la signature de 391 conventions représentant 520 milliards de dirhams depuis le lancement de la Charte de 2023, ainsi que l'approbation de 29 nouveaux projets (42 milliards DH, environ 9 800 emplois) répartis sur 16 provinces.",
-      "file": "https://aujourdhui.ma/actualite/charte-de-linvestissement-un-volume-de-520-milliards-dh-en-3-annees"
+      "file": "https://aujourdhui.ma/actualite/charte-de-linvestissement-un-volume-de-520-milliards-dh-en-3-annees",
+      "title_ar": "ميثاق الاستثمار: 520 مليار درهم ملتزم بها في ثلاث سنوات",
+      "excerpt_ar": "خلال الدورة الحادية عشرة للجنة الوطنية للاستثمارات، أعلنت الحكومة عن توقيع 391 اتفاقية تمثل 520 مليار درهم منذ إطلاق ميثاق 2023، إلى جانب المصادقة على 29 مشروعاً جديداً (42 مليار درهم، نحو 9.800 منصب شغل) موزعة على 16 إقليماً.",
+      "axisLabel_ar": "الاستثمار",
+      "type_ar": "رصد"
     }
   ]
 }

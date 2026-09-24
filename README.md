@@ -67,3 +67,14 @@ Le fichier a été placé dans `assets/img/geom-logo.png` et intégré automatiq
 ## Multilingue (AR / EN)
 
 Les boutons AR et EN restent désactivés pour l'instant. La police IBM Plex Sans (variante Arabic incluse) est déjà prête pour des pages `*-ar.html` en RTL, sur le modèle du dossier statutaire déjà produit.
+
+## Version arabe (bilingue FR / AR)
+
+- Chaque page française `xxx.html` a sa jumelle arabe `xxx-ar.html` (de droite à gauche). Le site s'ouvre toujours en français (`index.html`).
+- Le bouton de langue (العربية / Français) apparaît en haut de chaque page, à côté du logo. Il est généré par `assets/js/site-chrome.js` à partir des balises `<link rel="alternate" hreflang="...">` du `<head>` de chaque page.
+- Menu, pied de page et bouton « Assistant » arabes : listes `NAV_LINKS_AR` et `FOOTER_LINKS_AR` dans `site-chrome.js`.
+- Contenus JSON (`assets/data/`) : ajouter les champs `title_ar`, `excerpt_ar`, `body_ar`, `description_ar`, etc. S'ils manquent, le texte français s'affiche sur la version arabe.
+- Assistant FAQ : questions arabes dans `GEOM_FAQ_AR` (`assets/js/chat.js`).
+- Observatoire : le texte arabe est dans `assets/js/observatoire-ar.js` (dictionnaire « texte français → traduction arabe »), chargé uniquement par `observatoire-ar.html`.
+- Les formulaires arabes (adhésion, don, contact) portent les mêmes noms Netlify que les formulaires français : les demandes arrivent au même endroit.
+- Une modification de texte sur une page française doit être reportée sur sa jumelle `-ar.html`.

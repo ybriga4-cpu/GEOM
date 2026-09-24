@@ -251,3 +251,43 @@ body{font-family:var(--fb);background:var(--bg);color:var(--ms-ink);min-height:1
 @media(max-width:1200px){.gmap,.gevents{grid-template-columns:1fr}.g3{grid-template-columns:1fr 1fr}.energy-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:800px){.g2,.g3,.g4{grid-template-columns:1fr}.page{padding:12px 12px 40px}.mast-inner{padding:0 12px}.nav-pills{display:none}.energy-grid{grid-template-columns:1fr 1fr}}
 
+
+/* ── Version arabe (RTL) ──
+   Activée sur observatoire-ar.html (<html lang="ar" dir="rtl">).
+   Polices arabes, pas d'espacement entre lettres / majuscules, tailles minimales
+   lisibles pour l'arabe, et miroir des alignements orientés. Le bandeau défilant
+   et la carte restent en LTR (attribut dir="ltr" dans la page). */
+[dir="rtl"]{
+  --ff:'Noto Kufi Arabic','IBM Plex Sans Arabic',sans-serif;
+  --fb:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;
+  --fm:'IBM Plex Sans Arabic','IBM Plex Mono',sans-serif;
+}
+[dir="rtl"] .ticker{--fm:'IBM Plex Mono','IBM Plex Sans Arabic',monospace}
+[dir="rtl"] .logo small,[dir="rtl"] .tagline,[dir="rtl"] .sh-label,[dir="rtl"] .ck-city,
+[dir="rtl"] .alert-pill,[dir="rtl"] .fx th,[dir="rtl"] .ev-cat,[dir="rtl"] .zsev{letter-spacing:0;text-transform:none}
+[dir="rtl"] .logo small{font-family:'IBM Plex Mono',monospace;direction:ltr;text-align:right}
+[dir="rtl"] .tagline{font-size:10.5px;line-height:1.5}
+[dir="rtl"] .sh-label{font-size:12px;font-weight:600}
+[dir="rtl"] .ck-city{font-size:10.5px}
+[dir="rtl"] .alert-pill{font-size:10.5px}
+[dir="rtl"] .fx th{font-size:10.5px;text-align:right}
+[dir="rtl"] .ev-cat{font-size:10px}
+[dir="rtl"] .ev-time,[dir="rtl"] .ev-src,[dir="rtl"] .commo-unit{font-size:10px}
+[dir="rtl"] .ev-title{font-size:13px;line-height:1.6}
+[dir="rtl"] .card-title{letter-spacing:0}
+[dir="rtl"] .mast-right{margin-left:0;margin-right:auto}
+[dir="rtl"] .commo-val,[dir="rtl"] .commo-chg,[dir="rtl"] .idx-val,[dir="rtl"] .idx-chg,[dir="rtl"] .baro-val{text-align:left}
+[dir="rtl"] .commo > div:last-child{text-align:left !important}
+[dir="rtl"] .idx-val{margin-left:0;margin-right:auto}
+[dir="rtl"] .baro-lbl{width:160px}
+[dir="rtl"] .zone-item:hover{padding-left:6px;padding-right:6px}
+[dir="rtl"] .fx-rate,[dir="rtl"] .fx-chg,[dir="rtl"] .commo-val,[dir="rtl"] .commo-chg,[dir="rtl"] .idx-val,
+[dir="rtl"] .idx-chg,[dir="rtl"] .en-val,[dir="rtl"] .en-chg,[dir="rtl"] .ck-time,[dir="rtl"] .stat-n{direction:ltr;unicode-bidi:isolate}
+[dir="rtl"] .macro-val{unicode-bidi:plaintext}
+
+/* Mobile : le bandeau de titre passe sur plusieurs lignes au lieu de déborder (FR et AR) */
+@media(max-width:800px){
+  .mast-inner{flex-wrap:wrap;height:auto;padding:10px 12px;row-gap:8px}
+  .mast-inner .sep,.mast-inner .tagline{display:none}
+  .mast-right,[dir="rtl"] .mast-right{margin:0;width:100%;flex-wrap:wrap;justify-content:space-between}
+}

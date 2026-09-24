@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اتصل بنا — GEOM</title>
+<meta name="description" content="التواصل مع GEOM: الانخراط، الهبات، الصحافة أو طلب عام.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="alternate" hreflang="fr" href="contact.html">
+<link rel="alternate" hreflang="ar" href="contact-ar.html">
+<link rel="alternate" hreflang="x-default" href="contact.html">
+
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="wrap"><a class="back-home" href="index-ar.html">&rarr; العودة إلى الرئيسية</a></div>
+  <section style="padding-bottom:0">
+    <div class="wrap">
+      <p class="eyebrow">اتصل بنا</p>
+      <h1>صندوق رسائل GEOM</h1>
+      <p class="lede">اختاروا موضوع رسالتكم أدناه، أو راسلونا مباشرة عبر النموذج. ويمكنكم أيضاً تجربة <a href="chat-ar.html">مساعد الأسئلة الشائعة</a> للحصول على جواب فوري عن الأسئلة المتداولة.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="mailbox">
+        <div class="mailbox-tabs">
+          <h3>صناديق حسب الموضوع</h3>
+          <div class="mailbox-entry">
+            <div class="mailbox-icon">ا</div>
+            <div>
+              <h4>الانخراط والمجلس العلمي</h4>
+              <p>طلبات الانخراط، وترشيحات الخبراء.</p>
+            </div>
+          </div>
+          <div class="mailbox-entry">
+            <div class="mailbox-icon">ه</div>
+            <div>
+              <h4>الهبات والشراكات</h4>
+              <p>الدعم المالي، والإعانات، والرعاية.</p>
+            </div>
+          </div>
+          <div class="mailbox-entry">
+            <div class="mailbox-icon">ص</div>
+            <div>
+              <h4>الصحافة والمنشورات</h4>
+              <p>طلبات الاستشهاد، واقتراحات الدراسات.</p>
+            </div>
+          </div>
+          <div class="mailbox-entry">
+            <div class="mailbox-icon">ع</div>
+            <div>
+              <h4>عام</h4>
+              <p>أي سؤال آخر — <bdi dir="ltr">contact@geom.ma</bdi></p>
+            </div>
+          </div>
+        </div>
+
+        <form class="form-card" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-contact">
+          <input type="hidden" name="form-name" value="contact">
+          <p style="display:none">
+            <label>لا تملأ هذا الحقل: <input name="bot-field"></label>
+          </p>
+
+          <div class="field">
+            <label for="c-nom">الاسم الكامل</label>
+            <input type="text" id="c-nom" name="nom" required>
+          </div>
+          <div class="field">
+            <label for="c-email">البريد الإلكتروني</label>
+            <input type="email" id="c-email" name="email" dir="ltr" required>
+          </div>
+          <div class="field">
+            <label for="c-sujet">الموضوع</label>
+            <select id="c-sujet" name="sujet">
+              <option value="adhesion">الانخراط والمجلس العلمي</option>
+              <option value="dons">الهبات والشراكات</option>
+              <option value="presse">الصحافة والمنشورات</option>
+              <option value="general">عام</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-message">الرسالة</label>
+            <textarea id="c-message" name="message" required></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">إرسال الرسالة</button>
+          <p class="form-note">يتوصّل المكتب المسيّر بالرسائل. ويتم الرد في غضون بضعة أيام عمل.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/site-chrome.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

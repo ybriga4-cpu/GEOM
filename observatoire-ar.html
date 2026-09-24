@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مرصد GES — GEOM</title>
+<meta name="description" content="مرصد GES (Global Economy Surveyor) — الأسواق والجغرافيا السياسية والطاقة والمناخ، من إنجاز GEOM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="alternate" hreflang="fr" href="observatoire.html">
+<link rel="alternate" hreflang="ar" href="observatoire-ar.html">
+<link rel="alternate" hreflang="x-default" href="observatoire.html">
+<link rel="stylesheet" href="assets/css/observatoire.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <div class="wrap"><a class="back-home" href="index-ar.html">&rarr; العودة إلى الرئيسية</a></div>
+  <section style="padding-bottom:0">
+    <div class="wrap">
+      <p class="eyebrow">المرصد</p>
+      <h1>مرصد GES — <bdi dir="ltr">Global Economy Surveyor</bdi></h1>
+      <p class="lede">الأسواق والجغرافيا السياسية والطاقة والمناخ، يتتبّعها GEOM بشكل مستمر. وتتيح التبويبات أدناه التنقل بين مختلف طرق العرض.</p>
+      <p class="pill" style="margin-top:14px">معطيات للعرض التوضيحي — ستُنشر المصادر والمنهجية تباعاً مع دراسات المجلس العلمي</p>
+    </div>
+  </section>
+
+  <section style="padding-top:24px">
+    <div class="wrap">
+<header class="masthead">
+  <div class="mast-inner">
+    <div class="logo">مرصد <em>GES</em><small>Global Economy Surveyor</small></div>
+    <div class="sep"></div>
+    <div class="tagline">الأسواق · الجغرافيا السياسية<br>المواد الأولية · الأحداث</div>
+    <div class="nav-pills">
+      <button class="npill on" onclick="setView('global',this)">نظرة شاملة</button>
+      <button class="npill" onclick="setView('marches',this)">الأسواق</button>
+      <button class="npill" onclick="setView('conflits',this)">النزاعات</button>
+      <button class="npill" onclick="setView('energie',this)">الطاقة</button>
+      <button class="npill" onclick="setView('climat',this)">المناخ</button>
+    </div>
+    <div class="mast-right">
+      <div class="upd-badge" id="updBadge">—</div>
+      <button class="live" id="liveBtn" onclick="refreshAllData()" title="انقر للتحيين">مباشر</button>
+      <div class="mdate" id="mdate">—</div>
+    </div>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true" dir="ltr"><div class="ticker-inner" id="ticker"></div></div>
+
+<div class="page" id="mainPage">
+
+  <!-- ALERT (global) -->
+  <div class="alert view-section" id="sec-alert">
+    <span class="alert-pill">⚡ عاجل</span>
+    <span class="alert-txt" id="alertTxt">جارٍ تحميل المعلومات...</span>
+    <button class="alert-btn" onclick="nextAlert()">‹</button>
+  </div>
+
+  <!-- HORLOGES (global + marchés) -->
+  <div class="card amber view-section" id="sec-clocks" style="margin-bottom:14px">
+    <div class="card-hd"><span class="card-title">🕐 ساعات العالم</span><span class="card-sub" id="utc" dir="ltr">UTC —</span></div>
+    <div class="clocks" id="clocks"></div>
+  </div>
+
+  <!-- ─── VUE MARCHÉS ─── -->
+  <div class="view-section" id="sec-marches">
+    <div class="sh"><span class="sh-label">الأسواق المالية العالمية</span></div>
+    <div class="g3">
+      <div class="card blue">
+        <div class="card-hd">
+          <span class="card-title">💱 أسعار الصرف</span>
+          <span id="fxApiTag" class="api-tag api-sim">محاكاة</span>
+        </div>
+        <div style="padding:0"><table class="fx"><thead><tr><th>الزوج</th><th>السعر</th><th>تغيّر 24 س</th><th>52 أسبوعاً</th></tr></thead><tbody id="fxBody"></tbody></table></div>
+      </div>
+      <div class="card amber">
+        <div class="card-hd">
+          <span class="card-title">🛢 المواد الأولية</span>
+          <span class="api-tag api-sim">محاكاة</span>
+        </div>
+        <div class="card-body" id="commoBody"></div>
+      </div>
+      <div class="card green">
+        <div class="card-hd">
+          <span class="card-title">📈 المؤشرات البورصية</span>
+          <span class="api-tag api-sim">محاكاة</span>
+        </div>
+        <div class="card-body" id="idxBody"></div>
+      </div>
+    </div>
+
+    <!-- Stats macro -->
+    <div class="sh"><span class="sh-label">بالأرقام — الاقتصاد العالمي</span></div>
+    <div class="g4">
+      <div class="stat"><div class="stat-n" style="color:var(--green)" dir="ltr">+3.2%</div><div class="stat-l">نمو الناتج الداخلي الخام العالمي</div><div class="stat-d" style="color:var(--green)">توقعات صندوق النقد الدولي 2026</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--amber)" dir="ltr">4.2%</div><div class="stat-l">متوسط التضخم العالمي</div><div class="stat-d" style="color:var(--amber)">في انخفاض مقارنة بـ 2025</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--blue)" dir="ltr">5.25%</div><div class="stat-l">سعر الفائدة المرجعي للاحتياطي الفيدرالي</div><div class="stat-d" style="color:var(--blue)">دون تغيير — ماي 2026</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--teal)" dir="ltr">3.65%</div><div class="stat-l">سعر الفائدة المرجعي للبنك المركزي الأوروبي</div><div class="stat-d" style="color:var(--teal)">بعد تخفيضين في 2026</div></div>
+    </div>
+
+    <!-- Indicateurs macro détaillés -->
+    <div class="g2">
+      <div class="card blue">
+        <div class="card-hd"><span class="card-title">🔢 مؤشرات ماكرو-اقتصادية</span><span class="card-sub">صندوق النقد الدولي · OCDE · بنك المغرب · 2026</span></div>
+        <div class="card-body" id="macroBody"></div>
+      </div>
+      <div class="card amber">
+        <div class="card-hd"><span class="card-title">🌡 البارومتر المالي</span><span class="card-sub">النقطة / 100</span></div>
+        <div class="card-body" id="baroFinBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── VUE CONFLITS ─── -->
+  <div class="view-section" id="sec-conflits">
+    <div class="sh"><span class="sh-label">الخريطة العالمية للتوترات الجيوسياسية</span></div>
+    <div class="gmap">
+      <div class="map-wrap">
+        <div class="map-controls">
+          <span style="font-size:10px;color:var(--ink4)">عرض:</span>
+          <button class="mf war on" onclick="toggleMapFilter(this,'war')">🔴 نزاعات نشطة</button>
+          <button class="mf tension on" onclick="toggleMapFilter(this,'tension')">🟡 مناطق توتر</button>
+          <button class="mf watch on" onclick="toggleMapFilter(this,'watch')">🔵 تحت المراقبة</button>
+          <span style="margin-right:auto;font-size:10px;color:var(--ink5)">انقر على علامة لعرض التفاصيل</span>
+        </div>
+        <div id="mapContainer" dir="ltr" style="width:100%;background:#C8DFF0;position:relative;min-height:420px">
+          <div id="mapLoading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--ink4)" dir="rtl">جارٍ تحميل خريطة العالم…</div>
+          <svg id="worldSvg" style="width:100%;display:block"></svg>
+        </div>
+        <div class="map-legend">
+          <div class="ml-item"><div class="ml-dot" style="background:var(--red)"></div>نزاع مسلح نشط</div>
+          <div class="ml-item"><div class="ml-dot" style="background:var(--amber)"></div>منطقة توتر</div>
+          <div class="ml-item"><div class="ml-dot" style="background:var(--blue)"></div>تحت المراقبة</div>
+          <div style="margin-right:auto;font-size:10px;color:var(--ink5)">المصادر: <bdi dir="ltr">ACLED · ONU · OSCE · ICG</bdi></div>
+        </div>
+      </div>
+      <div class="card red">
+        <div class="card-hd"><span class="card-title">⚠️ المناطق النشطة</span><span class="card-sub" id="zcount">10 مناطق</span></div>
+        <div class="card-body" style="max-height:490px;overflow-y:auto" id="zonePanel"></div>
+      </div>
+    </div>
+
+    <!-- Stats conflits -->
+    <div class="g4">
+      <div class="stat"><div class="stat-n" style="color:var(--red)">58</div><div class="stat-l">نزاعاً مسلحاً نشطاً</div><div class="stat-d" style="color:var(--red)">↑ +5 مقارنة بـ 2024</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--amber)" dir="ltr">122M</div><div class="stat-l">شخص نازح</div><div class="stat-d" style="color:var(--amber)">رقم قياسي — المفوضية السامية للاجئين 2026</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--blue)">4</div><div class="stat-l">أزمات نووية نشطة</div><div class="stat-d" style="color:var(--blue)">إيران · كوريا · روسيا · باكستان</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--green)">38</div><div class="stat-l">بعثة أممية لحفظ السلام</div><div class="stat-d" style="color:var(--green)">86.000 من ذوي الخوذات الزرقاء</div></div>
+    </div>
+  </div>
+
+  <!-- ─── VUE ÉNERGIE ─── -->
+  <div class="view-section" id="sec-energie">
+    <div class="sh"><span class="sh-label">أسواق الطاقة العالمية</span></div>
+    <div class="g2">
+      <div class="card orange">
+        <div class="card-hd"><span class="card-title">⚡ أسعار الطاقة</span><span class="card-sub">معطيات إرشادية · ماي 2026</span></div>
+        <div class="card-body">
+          <div class="energy-grid" id="energyGrid"></div>
+        </div>
+      </div>
+      <div class="card blue">
+        <div class="card-hd"><span class="card-title">🌐 التدفقات والتبعيات</span><span class="card-sub">الجغرافيا السياسية للطاقة</span></div>
+        <div class="card-body" id="energyGeoBody"></div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="card teal">
+        <div class="card-hd"><span class="card-title">☀️ الطاقات المتجددة</span><span class="card-sub">القدرة المنشأة عالمياً</span></div>
+        <div class="card-body" id="renewBody"></div>
+      </div>
+      <div class="card red">
+        <div class="card-hd"><span class="card-title">🌡 الإجهاد الطاقي</span><span class="card-sub">النقطة / 100 حسب المنطقة</span></div>
+        <div class="card-body" id="energyStressBody"></div>
+      </div>
+    </div>
+    <div class="g4">
+      <div class="stat"><div class="stat-n" style="color:var(--orange)">89.4</div><div class="stat-l">إنتاج النفط العالمي (مليون برميل/يوم)</div><div class="stat-d" style="color:var(--ink5)">إنتاج أوبك+ وخارجها</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--amber)" dir="ltr">$88.60</div><div class="stat-l">برنت الفوري ($/برميل)</div><div class="stat-d" style="color:var(--amber)">إرشادي — ICE لندن</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--green)" dir="ltr">38%</div><div class="stat-l">حصة الطاقات المتجددة</div><div class="stat-d" style="color:var(--green)">من الإنتاج الكهربائي العالمي</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--blue)">440</div><div class="stat-l">مفاعلاً نووياً نشطاً</div><div class="stat-d" style="color:var(--blue)">+18 قيد الإنشاء</div></div>
+    </div>
+  </div>
+
+  <!-- ─── VUE CLIMAT ─── -->
+  <div class="view-section" id="sec-climat">
+    <div class="sh"><span class="sh-label">المراقبة المناخية والإنذارات البيئية</span></div>
+    <div class="g3">
+      <div class="card teal" style="grid-column:span 2">
+        <div class="card-hd"><span class="card-title">🌪 إنذارات الطقس والكوارث النشطة</span><span class="card-sub"><bdi dir="ltr">WMO · OCHA · Copernicus</bdi> · ماي 2026</span></div>
+        <div class="card-body" id="climateAlerts"></div>
+      </div>
+      <div class="card blue">
+        <div class="card-hd"><span class="card-title">🌡 مؤشرات كوكبية</span><span class="card-sub"><bdi dir="ltr">NASA · GIEC · NOAA</bdi></span></div>
+        <div class="card-body" id="climateStats"></div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="card red">
+        <div class="card-hd"><span class="card-title">🌍 البارومتر المناخي</span><span class="card-sub">النقطة / 100</span></div>
+        <div class="card-body" id="baroClimBody"></div>
+      </div>
+      <div class="card amber">
+        <div class="card-hd"><span class="card-title">📉 الأثر الاقتصادي للمناخ</span><span class="card-sub">البنك الدولي · Swiss Re 2026</span></div>
+        <div class="card-body" id="climEcoBody"></div>
+      </div>
+    </div>
+    <div class="g4">
+      <div class="stat"><div class="stat-n" style="color:var(--red)" dir="ltr">+1.38°C</div><div class="stat-l">شذوذ الحرارة العالمية</div><div class="stat-d" style="color:var(--red)">مقارنة بما قبل الثورة الصناعية — NASA GISS 2026</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--amber)" dir="ltr">426 ppm</div><div class="stat-l">ثاني أكسيد الكربون في الغلاف الجوي</div><div class="stat-d" style="color:var(--amber)">رقم قياسي — NOAA ماونا لوا</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--blue)" dir="ltr">-3.1 M km²</div><div class="stat-l">الجليد القطبي الشمالي المفقود</div><div class="stat-d" style="color:var(--blue)">مقارنة بمتوسط 1981-2010</div></div>
+      <div class="stat"><div class="stat-n" style="color:var(--teal)" dir="ltr">$340 Md</div><div class="stat-l">خسائر المناخ 2025</div><div class="stat-d" style="color:var(--teal)">Swiss Re Institute</div></div>
+    </div>
+  </div>
+
+  <!-- ─── SECTION ÉVÉNEMENTS ─── -->
+  <div class="view-section" id="sec-events">
+    <div class="sh"><span class="sh-label">الأحداث والتحليل العالمي</span></div>
+    <div class="gevents">
+      <div class="card teal">
+        <div class="card-hd">
+          <span class="card-title">📰 أحداث بارزة</span>
+          <div class="ev-filters">
+            <button class="ef-pill active-all" onclick="filterEvents('all',this)">الكل</button>
+            <button class="ef-pill" onclick="filterEvents('cs',this)">🔴 الأمن</button>
+            <button class="ef-pill" onclick="filterEvents('ce',this)">🟢 الاقتصاد</button>
+            <button class="ef-pill" onclick="filterEvents('cg',this)">🔵 جيوسياسة</button>
+            <button class="ef-pill" onclick="filterEvents('cc',this)">🟡 المناخ</button>
+            <button class="ef-pill" onclick="filterEvents('cn',this)">🟠 الطاقة</button>
+          </div>
+        </div>
+        <div class="card-body" id="evList"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card red">
+          <div class="card-hd"><span class="card-title">🌡 البارومتر العالمي</span><span class="card-sub">النقطة / 100</span></div>
+          <div class="card-body" id="baroBody"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+    </div>
+  </section>
+
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="note-box">
+        <strong>للتعمّق أكثر:</strong> ستُفصَّل المناهج والمصادر المعتمدة لكل مؤشر في <a href="publications-ar.html">المنشورات</a> المقابلة، بعد مصادقة المجلس العلمي عليها.
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/site-chrome.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/observatoire-ar.js"></script>
+<script src="assets/js/observatoire.js"></script>
+</body>
+</html>

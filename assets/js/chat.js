@@ -2,7 +2,9 @@
    Répond à partir d'une liste de questions/réponses prédéfinies.
    Pour toute demande hors-sujet, renvoie vers la boîte aux lettres (contact.html). */
 
-const GEOM_FAQ = [
+const CHAT_AR = (document.documentElement.lang || "").toLowerCase().startsWith("ar");
+
+const GEOM_FAQ_FR = [
   {
     q: "Comment adhérer à GEOM ?",
     keywords: ["adher", "membre", "rejoindre", "inscri"],
@@ -40,12 +42,60 @@ const GEOM_FAQ = [
   }
 ];
 
+// Version arabe : mêmes questions, mots-clés en arabe (et quelques mots latins utiles).
+const GEOM_FAQ_AR = [
+  {
+    q: "كيف أنخرط في GEOM؟",
+    keywords: ["انخرط", "انخراط", "عضو", "عضوية", "انضم", "انضمام", "تسجيل", "سجل"],
+    a: "الانخراط في GEOM مجاني لجميع فئات الأعضاء. يوجد النموذج في صفحة «الانخراط» — وستتوصلون بإشعار بالتوصل ثم بتأكيد من المكتب."
+  },
+  {
+    q: "هل يجب أداء اشتراك؟",
+    keywords: ["اشتراك", "أداء", "اداء", "دفع", "ثمن", "سعر", "مجان", "رسوم", "واجب"],
+    a: "لا. لا يطلب GEOM أي اشتراك، لا عند الانخراط ولا بشكل دوري، بما في ذلك بالنسبة للأعضاء الفاعلين. ويعمل التجمّع فقط بفضل الهبات والإعانات والرعاية."
+  },
+  {
+    q: "من يمكنه الانخراط في GEOM؟",
+    keywords: ["من يمكن", "فاعل", "صناع", "عقار", "سياح", "هيئة", "هيئات", "قطاع", "مقاول"],
+    a: "كل فاعل اقتصادي مغربي: الصناعيون، والمنعشون العقاريون، والفاعلون السياحيون، والمستثمرون، ومقدّمو الخدمات. وينتظم GEOM في ست هيئات قطاعية — انظر صفحة «المهام والهيكلة»."
+  },
+  {
+    q: "هل يعوّض GEOM الجامعات القطاعية؟",
+    keywords: ["cgem", "amica", "fimme", "fenelec", "amith", "fenagri", "جامعة", "جامعات", "كونفدرالية", "يعوض", "يعوّض", "منافس"],
+    a: "لا. يتموقع GEOM بوصفه مكمّلاً أفقياً للجامعات القطاعية القائمة وليس منافساً لها: إذ يمكن لفاعل منخرط أصلاً في جامعة ما أن ينخرط أيضاً في GEOM."
+  },
+  {
+    q: "كيف أقدّم هبة؟",
+    keywords: ["هبة", "تبرع", "دعم", "تمويل", "إعانة", "اعانة", "رعاية"],
+    a: "من صفحة «الانخراط»، في قسم «الدعم بهبة». وسيتصل بكم أحد أعضاء المكتب لتحديد الكيفيات العملية."
+  },
+  {
+    q: "أين أجد المنشورات؟",
+    keywords: ["منشور", "منشورات", "دراسة", "دراسات", "تقرير", "مقال", "pdf"],
+    a: "جميع المنشورات متاحة مجاناً ودون تسجيل في صفحة «المنشورات» — ويمكن تصفيتها حسب محور البحث."
+  },
+  {
+    q: "كيف أقترح دراسة أو شراكة؟",
+    keywords: ["اقتراح", "أقترح", "اقترح", "شراكة", "تعاون", "باحث", "المجلس العلمي"],
+    a: "راسلونا عبر صندوق الرسائل (صفحة «اتصل بنا») مع تحديد موضوع اقتراحكم — وسيُحال على المكتب، وعند الاقتضاء على المجلس العلمي."
+  }
+];
+
+const GEOM_FAQ = CHAT_AR ? GEOM_FAQ_AR : GEOM_FAQ_FR;
+const CHAT_TXT = CHAT_AR ? {
+  fallback: "ليس لدي جواب جاهز عن هذا السؤال. راسلونا مباشرة عبر صندوق الرسائل — وسيجيبكم أحد أعضاء المكتب شخصياً.",
+  hello: "مرحباً، أنا مساعد الأسئلة الشائعة لـ GEOM. اطرحوا سؤالاً أو اختاروا موضوعاً أدناه."
+} : {
+  fallback: "Je n'ai pas de réponse toute prête pour cette question. Écrivez-nous directement via la boîte aux lettres — un membre du Bureau vous répondra personnellement.",
+  hello: "Bonjour, je suis l'assistant FAQ de GEOM. Posez une question ou choisissez un sujet ci-dessous."
+};
+
 function chatFindAnswer(text) {
   const t = text.toLowerCase();
   for (const item of GEOM_FAQ) {
     if (item.keywords.some((k) => t.includes(k))) return item.a;
   }
-  return "Je n'ai pas de réponse toute prête pour cette question. Écrivez-nous directement via la boîte aux lettres — un membre du Bureau vous répondra personnellement.";
+  return CHAT_TXT.fallback;
 }
 
 function chatAppend(log, text, who) {
@@ -63,7 +113,7 @@ function initChat() {
   const chipsWrap = document.querySelector("[data-chat-chips]");
   if (!log || !form || !input) return;
 
-  chatAppend(log, "Bonjour, je suis l'assistant FAQ de GEOM. Posez une question ou choisissez un sujet ci-dessous.", "bot");
+  chatAppend(log, CHAT_TXT.hello, "bot");
 
   if (chipsWrap) {
     GEOM_FAQ.forEach((item) => {
