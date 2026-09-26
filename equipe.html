@@ -16,8 +16,12 @@
 <style>
   /* --- Ajouts page Équipe : photo, popup résumé, placeholders --- */
   .person-avatar-photo{
-    width:72px;height:72px;border-radius:50%;overflow:hidden;flex-shrink:0;
-    background:#eee;
+    width:160px;height:160px;border-radius:10px;overflow:hidden;flex-shrink:0;
+    background:#eee;border:3px solid #fff;box-shadow:0 4px 14px rgba(11,43,80,0.18);
+  }
+  @media (max-width:560px){
+    .person{ flex-direction:column; }
+    .person-avatar-photo{ width:200px;height:200px; }
   }
   .person-avatar-photo img{
     width:100%;height:100%;object-fit:cover;display:block;
@@ -98,24 +102,43 @@
 
       <div class="person">
         <div class="person-avatar-photo">
-          <img src="assets/img/adam-fassil.png" alt="Adam FASSIL, Président Fondateur de GEOM">
+          <img src="assets/img/adam-fassil-portrait.jpg" alt="Adam FASSIL, Président Fondateur de GEOM">
         </div>
         <div>
           <h3>Adam FASSIL</h3>
           <span class="person-role">Président Fondateur</span>
-          <p>Responsable de la direction scientifique, morale et administrative de l'association.</p>
+          <p>Responsable de la direction morale et administrative du Groupement.</p>
           <button type="button" class="link-button" onclick="document.getElementById('modal-fassil').classList.add('is-open')">
             Résumé professionnel
           </button>
         </div>
       </div>
 
-      <div class="person person-placeholder">
-        <div class="person-avatar">VP</div>
+      <div class="person">
+        <div class="person-avatar-photo">
+          <img src="assets/img/youssef-briga.jpg" alt="Youssef BRIGA, Vice-Président de GEOM">
+        </div>
         <div>
-          <h3>Vice-Président</h3>
-          <span class="person-role">Poste à pourvoir</span>
-          <p>Place réservée au Vice-Président du Bureau Dirigeant.</p>
+          <h3>Youssef BRIGA</h3>
+          <span class="person-role">Vice-Président</span>
+          <p>Responsable de la direction scientifique et stratégique du Groupement.</p>
+          <button type="button" class="link-button" onclick="document.getElementById('modal-briga').classList.add('is-open')">
+            Résumé professionnel
+          </button>
+        </div>
+      </div>
+
+      <div class="person">
+        <div class="person-avatar-photo">
+          <img src="assets/img/yassine-knouzi.jpg" alt="Yassine KNOUZI, Secrétaire Général de GEOM">
+        </div>
+        <div>
+          <h3>Yassine KNOUZI</h3>
+          <span class="person-role">Secrétaire Général</span>
+          <p>Responsable des relations publiques et de la coordination des composantes du Groupement.</p>
+          <button type="button" class="link-button" onclick="document.getElementById('modal-knouzi').classList.add('is-open')">
+            Résumé professionnel
+          </button>
         </div>
       </div>
 
@@ -182,74 +205,69 @@
 <!-- Popup Résumé professionnel — Adam FASSIL -->
 <div id="modal-fassil" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-fassil-title">
   <div class="modal-box">
-    <button type="button" class="modal-close" aria-label="Fermer" onclick="document.getElementById('modal-fassil').classList.remove('is-open')">&times;</button>
+    <button type="button" class="modal-close" aria-label="Fermer">&times;</button>
     <h2 id="modal-fassil-title">Résumé professionnel — Adam FASSIL</h2>
     <div class="modal-body">
 
-      <p>Adam Fassil est un dirigeant technologique, entrepreneur et investisseur fort de plus de 35 ans d'expérience internationale, répartie entre les États-Unis et le Maroc. Il a bâti sa carrière dans le secteur technologique américain, en Californie et en Arizona, avant d'élargir son champ d'action à l'investissement hôtelier et immobilier au Maroc, où il réside désormais. Il continue en parallèle d'accompagner des organisations technologiques en tant que consultant exécutif.</p>
+      <p>Adam Fassil est un dirigeant du secteur technologique, entrepreneur et investisseur, fort de plus de 35 ans d'expérience entre les États-Unis et le Maroc. Après une carrière dans la tech américaine (Californie, Arizona), il a étendu ses activités à l'investissement hôtelier et immobilier au Maroc, où il réside aujourd'hui, tout en continuant d'exercer comme consultant exécutif.</p>
 
-      <p>Son parcours se distingue par une double compétence : une maîtrise technique acquise auprès de grandes organisations américaines, et une capacité entrepreneuriale démontrée dans la création, le financement et la gestion opérationnelle de projets d'investissement, notamment dans l'hôtellerie et l'immobilier marocains.</p>
+      <h3>Formation</h3>
+      <p>Université de Berkeley (Business &amp; Technologie)</p>
 
       <h3>Parcours professionnel</h3>
 
-      <p class="job">Consultant exécutif — SoftPoint, Scottsdale (Arizona, États-Unis)</p>
+      <p class="job">Consultant exécutif — SoftPoint, Scottsdale (Arizona)</p>
       <span class="period">Poste actuel</span>
-      <ul>
-        <li>Conseil exécutif et accompagnement stratégique de haut niveau</li>
-        <li>Conseil aux équipes dirigeantes sur la croissance, l'efficacité opérationnelle et les initiatives technologiques</li>
-        <li>Soutien au développement commercial, à la relation client et à la planification stratégique</li>
-        <li>Alignement des investissements technologiques sur les objectifs de long terme des organisations</li>
-      </ul>
+      <p>Conseil stratégique aux équipes dirigeantes : croissance, efficacité opérationnelle, alignement des investissements technologiques sur les objectifs de long terme de l'organisation.</p>
 
       <p class="job">Entrepreneur &amp; Investisseur — Maroc</p>
       <span class="period">2000 – aujourd'hui</span>
-      <ul>
-        <li>Développement et gestion d'investissements dans l'hôtellerie, le tourisme et l'immobilier</li>
-        <li>Acquisition, rénovation et exploitation de propriétés hôtelières et d'actifs immobiliers</li>
-        <li>Pilotage de la planification, du financement et de la gestion opérationnelle de projets d'investissement</li>
-        <li>Construction de relations stratégiques avec investisseurs, entrepreneurs du bâtiment et professionnels de l'hôtellerie</li>
-        <li>Supervision du développement immobilier et de la gestion d'actifs</li>
-      </ul>
+      <p>Acquisition, rénovation et exploitation de biens hôteliers et immobiliers ; supervision du financement et de la gestion opérationnelle ; relations stratégiques avec les investisseurs et les professionnels du secteur.</p>
 
-      <p class="job">Associé &amp; Dirigeant d'entreprise — Technology Ventures, San Francisco &amp; Scottsdale (États-Unis)</p>
-      <ul>
-        <li>Cofondation et association dans des entreprises technologiques</li>
-        <li>Contribution à l'expansion des opérations sur des marchés américains concurrentiels</li>
-        <li>Pilotage de la planification stratégique, de l'acquisition de clients et du développement commercial</li>
-        <li>Construction de partenariats ayant contribué à une croissance significative et à une présence de marché durable</li>
-      </ul>
+      <p class="job">Associé — Technology Ventures, San Francisco &amp; Scottsdale</p>
+      <p>Cofondation d'entreprises technologiques ; développement commercial et expansion sur des marchés américains concurrentiels.</p>
 
-      <p class="job">Consultant &amp; rôles exécutifs en technologie — États-Unis (IBM, HIS, MAI – Orange County, Californie)</p>
-      <ul>
-        <li>Participation à des projets d'entreprise technologiques et de solutions d'affaires (IBM)</li>
-        <li>Accompagnement de clients grands comptes dans l'implémentation de systèmes et d'initiatives technologiques</li>
-        <li>Contribution à l'amélioration de l'efficacité opérationnelle par la technologie (HIS)</li>
-        <li>Projets de systèmes technologiques et d'affaires au service des besoins clients et organisationnels (MAI)</li>
-      </ul>
+      <p class="job">Rôles techniques &amp; de conseil — IBM, HIS, MAI (Californie)</p>
+      <p>Projets d'entreprise, implémentation de systèmes pour de grands comptes, amélioration de l'efficacité opérationnelle par la technologie.</p>
 
-      <p class="job">Début de carrière — Secteur hôtelier</p>
-      <ul>
-        <li>Emploi à temps partiel dans l'hôtellerie durant ses études supérieures</li>
-        <li>Développement de compétences en service client, en gestion opérationnelle et managériale</li>
-      </ul>
+      <p class="job">Début de carrière</p>
+      <p>Emploi dans l'hôtellerie durant ses études : une expérience fondatrice en service client et en gestion opérationnelle.</p>
 
-      <h3>Formation</h3>
-      <ul>
-        <li>Université de Marrakech (Maroc) — Études universitaires</li>
-        <li>Berkeley Extension, Berkeley (Californie, États-Unis) — Études avancées en business et technologie</li>
-      </ul>
+      <h3>Faits marquants</h3>
+      <p>Carrière internationale entre le Maroc et les États-Unis ; transition de la tech vers l'hôtellerie et l'immobilier ; activité de conseil stratégique menée parallèlement à des projets d'investissement de long terme.</p>
 
-      <h3>Langues</h3>
-      <p>Arabe · Anglais · Français · Espagnol</p>
+      <h3>Compétences</h3>
+      <p>Leadership exécutif · Conseil en technologie · Développement commercial · Partenariats stratégiques · Entrepreneuriat · Investissement immobilier · Management hôtelier</p>
 
-      <h3>Faits marquants entrepreneuriaux</h3>
-      <ul>
-        <li>Construction d'une carrière internationale réussie entre le Maroc et les États-Unis</li>
-        <li>Participation à la croissance d'entreprises technologiques en Californie et en Arizona</li>
-        <li>Transition d'une carrière de dirigeant technologique vers l'investissement hôtelier et immobilier</li>
-        <li>Gestion et développement de projets d'investissement de long terme au Maroc</li>
-        <li>Poursuite d'un rôle de conseil stratégique auprès d'entreprises via le consulting exécutif</li>
-      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Popup Résumé professionnel — Yassine KNOUZI -->
+<div id="modal-knouzi" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-knouzi-title">
+  <div class="modal-box">
+    <button type="button" class="modal-close" aria-label="Fermer">&times;</button>
+    <h2 id="modal-knouzi-title">Résumé professionnel — Yassine KNOUZI</h2>
+    <div class="modal-body">
+
+      <p>Conseiller financier, commercial et administratif, spécialisé dans l'optimisation et la valorisation des investissements, Yassine KNOUZI accompagne investisseurs et dirigeants dans la sécurisation de leur capital, la structuration de montages financiers solides et la maximisation de la rentabilité de leurs projets.</p>
+
+      <p>Sa maîtrise rigoureuse des cadres réglementaires et administratifs, alliée à une vision commerciale pragmatique, permet de réduire l'exposition aux risques opérationnels et d'accélérer la concrétisation du retour sur investissement. Son intervention constitue un levier stratégique pour transformer les investissements en actifs performants et pérennes.</p>
+
+    </div>
+  </div>
+</div>
+
+<!-- Popup Résumé professionnel — Youssef BRIGA -->
+<div id="modal-briga" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-briga-title">
+  <div class="modal-box">
+    <button type="button" class="modal-close" aria-label="Fermer">&times;</button>
+    <h2 id="modal-briga-title">Résumé professionnel — Youssef BRIGA</h2>
+    <div class="modal-body">
+
+      <p>Docteur d'État en droit public, Youssef BRIGA compte plus de 25 ans d'expérience comme cadre de l'Administration des Douanes. Il est certifié expert en zones franches auprès de l'Organisation mondiale des douanes (OMD). Il est également Black Belt en Lean Six Sigma et titulaire de plus de 40 certifications internationales en Project Management.</p>
+
+      <p>Il est le fondateur de l'Observatoire Marocain de l'Économie et de l'Intégration des Investissements — OMEII (<a href="https://www.omeii.ma" target="_blank" rel="noopener">www.omeii.ma</a>) — et l'auteur de plusieurs ouvrages, dont : <em>Stratégies d'investissement</em>, <em>E-commerce et business models digitaux</em> et <em>Guerres Douanières / Customs Wars</em>.</p>
 
     </div>
   </div>
@@ -258,12 +276,14 @@
 <script src="assets/js/site-chrome.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
-  // Fermer la popup en cliquant sur l'overlay (hors de la boîte) ou avec Échap
-  document.getElementById('modal-fassil').addEventListener('click', function(e){
-    if(e.target === this){ this.classList.remove('is-open'); }
+  // Fermer les popups : bouton ×, clic sur l'overlay (hors de la boîte) ou touche Échap
+  document.querySelectorAll('.modal-overlay').forEach(function(m){
+    m.addEventListener('click', function(e){
+      if(e.target === m || e.target.classList.contains('modal-close')){ m.classList.remove('is-open'); }
+    });
   });
   document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape'){ document.getElementById('modal-fassil').classList.remove('is-open'); }
+    if(e.key === 'Escape'){ document.querySelectorAll('.modal-overlay.is-open').forEach(function(m){ m.classList.remove('is-open'); }); }
   });
 </script>
 

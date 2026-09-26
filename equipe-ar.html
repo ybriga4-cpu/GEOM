@@ -15,8 +15,12 @@
 <style>
   /* --- Ajouts page Équipe : photo, popup résumé, placeholders --- */
   .person-avatar-photo{
-    width:72px;height:72px;border-radius:50%;overflow:hidden;flex-shrink:0;
-    background:#eee;
+    width:160px;height:160px;border-radius:10px;overflow:hidden;flex-shrink:0;
+    background:#eee;border:3px solid #fff;box-shadow:0 4px 14px rgba(11,43,80,0.18);
+  }
+  @media (max-width:560px){
+    .person{ flex-direction:column; }
+    .person-avatar-photo{ width:200px;height:200px; }
   }
   .person-avatar-photo img{
     width:100%;height:100%;object-fit:cover;display:block;
@@ -106,24 +110,43 @@
 
       <div class="person">
         <div class="person-avatar-photo">
-          <img src="assets/img/adam-fassil.png" alt="آدم فاسيل، الرئيس المؤسس لـ GEOM">
+          <img src="assets/img/adam-fassil-portrait.jpg" alt="آدم فاسيل، الرئيس المؤسس لـ GEOM">
         </div>
         <div>
           <h3>Adam FASSIL <span style="font-weight:500">— آدم فاسيل</span></h3>
           <span class="person-role">الرئيس المؤسس</span>
-          <p>مسؤول عن التسيير العلمي والمعنوي والإداري للجمعية.</p>
+          <p>مسؤول عن التسيير المعنوي والإداري للتجمّع.</p>
           <button type="button" class="link-button" onclick="document.getElementById('modal-fassil').classList.add('is-open')">
             الملخص المهني
           </button>
         </div>
       </div>
 
-      <div class="person person-placeholder">
-        <div class="person-avatar">ن ر</div>
+      <div class="person">
+        <div class="person-avatar-photo">
+          <img src="assets/img/youssef-briga.jpg" alt="Youssef BRIGA، نائب رئيس GEOM">
+        </div>
         <div>
-          <h3>نائب الرئيس</h3>
-          <span class="person-role">منصب شاغر</span>
-          <p>مقعد مخصص لنائب رئيس المكتب المسيّر.</p>
+          <h3>Youssef BRIGA</h3>
+          <span class="person-role">نائب الرئيس</span>
+          <p>مسؤول عن التسيير العلمي والاستراتيجي للتجمّع.</p>
+          <button type="button" class="link-button" onclick="document.getElementById('modal-briga').classList.add('is-open')">
+            الملخص المهني
+          </button>
+        </div>
+      </div>
+
+      <div class="person">
+        <div class="person-avatar-photo">
+          <img src="assets/img/yassine-knouzi.jpg" alt="Yassine KNOUZI، الكاتب العام لـ GEOM">
+        </div>
+        <div>
+          <h3>Yassine KNOUZI</h3>
+          <span class="person-role">الكاتب العام</span>
+          <p>مسؤول عن العلاقات العامة وتنسيق مكوّنات التجمّع.</p>
+          <button type="button" class="link-button" onclick="document.getElementById('modal-knouzi').classList.add('is-open')">
+            الملخص المهني
+          </button>
         </div>
       </div>
 
@@ -192,85 +215,83 @@
 <!-- Popup — الملخص المهني لآدم فاسيل -->
 <div id="modal-fassil" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-fassil-title">
   <div class="modal-box">
-    <button type="button" class="modal-close" aria-label="إغلاق" onclick="document.getElementById('modal-fassil').classList.remove('is-open')">&times;</button>
+    <button type="button" class="modal-close" aria-label="إغلاق">&times;</button>
     <h2 id="modal-fassil-title">الملخص المهني — آدم فاسيل</h2>
     <div class="modal-body">
 
-      <p>آدم فاسيل مسيّر في مجال التكنولوجيا، ومقاول ومستثمر، راكم أكثر من 35 سنة من الخبرة الدولية بين الولايات المتحدة الأمريكية والمغرب. بنى مساره المهني في قطاع التكنولوجيا الأمريكي، بكاليفورنيا وأريزونا، قبل أن يوسّع مجال نشاطه ليشمل الاستثمار الفندقي والعقاري بالمغرب، حيث يقيم حالياً. ويواصل بالموازاة مع ذلك مواكبة مؤسسات تكنولوجية بصفته مستشاراً تنفيذياً.</p>
+      <p>آدم فاسيل مسيّر في قطاع التكنولوجيا، ومقاول ومستثمر، راكم أكثر من 35 سنة من الخبرة بين الولايات المتحدة الأمريكية والمغرب. بعد مسار مهني في قطاع التكنولوجيا الأمريكي (كاليفورنيا، أريزونا)، وسّع نشاطه ليشمل الاستثمار الفندقي والعقاري بالمغرب حيث يقيم حالياً، مع مواصلة عمله مستشاراً تنفيذياً.</p>
 
-      <p>يتميّز مساره بكفاءة مزدوجة: تمكّن تقني اكتسبه داخل مؤسسات أمريكية كبرى، وقدرة مقاولاتية أثبتها في إحداث مشاريع استثمارية وتمويلها وتدبيرها العملياتي، لا سيما في قطاعي الفندقة والعقار بالمغرب.</p>
+      <h3>التكوين</h3>
+      <p>جامعة بيركلي (إدارة الأعمال والتكنولوجيا)</p>
 
       <h3>المسار المهني</h3>
 
-      <p class="job">مستشار تنفيذي — SoftPoint، سكوتسديل (أريزونا، الولايات المتحدة)</p>
+      <p class="job">مستشار تنفيذي — SoftPoint، سكوتسديل (أريزونا)</p>
       <span class="period">المنصب الحالي</span>
-      <ul>
-        <li>استشارة تنفيذية ومواكبة استراتيجية رفيعة المستوى</li>
-        <li>تقديم المشورة لفرق الإدارة في مجالات النمو والنجاعة العملياتية والمبادرات التكنولوجية</li>
-        <li>دعم التطوير التجاري والعلاقة مع الزبناء والتخطيط الاستراتيجي</li>
-        <li>ملاءمة الاستثمارات التكنولوجية مع الأهداف بعيدة المدى للمؤسسات</li>
-      </ul>
+      <p>استشارة استراتيجية لفرق التسيير: النمو، والنجاعة التشغيلية، وملاءمة الاستثمارات التكنولوجية مع الأهداف بعيدة المدى للمؤسسة.</p>
 
       <p class="job">مقاول ومستثمر — المغرب</p>
-      <span class="period"><bdi dir="ltr">2000</bdi> – إلى اليوم</span>
-      <ul>
-        <li>تطوير وتدبير استثمارات في الفندقة والسياحة والعقار</li>
-        <li>اقتناء وتجديد واستغلال عقارات فندقية وأصول عقارية</li>
-        <li>قيادة التخطيط والتمويل والتدبير العملياتي للمشاريع الاستثمارية</li>
-        <li>نسج علاقات استراتيجية مع المستثمرين ومقاولي البناء ومهنيي الفندقة</li>
-        <li>الإشراف على التطوير العقاري وتدبير الأصول</li>
-      </ul>
+      <span class="period">2000 – اليوم</span>
+      <p>اقتناء وتجديد واستغلال عقارات فندقية وعقارية؛ الإشراف على التمويل والتدبير التشغيلي؛ نسج علاقات استراتيجية مع المستثمرين ومهنيي القطاع.</p>
 
-      <p class="job">شريك ومسيّر مقاولة — Technology Ventures، سان فرانسيسكو وسكوتسديل (الولايات المتحدة)</p>
-      <ul>
-        <li>المشاركة في تأسيس مقاولات تكنولوجية والشراكة فيها</li>
-        <li>الإسهام في توسيع العمليات داخل أسواق أمريكية تنافسية</li>
-        <li>قيادة التخطيط الاستراتيجي واستقطاب الزبناء والتطوير التجاري</li>
-        <li>بناء شراكات أسهمت في نمو ملموس وحضور دائم في السوق</li>
-      </ul>
+      <p class="job">شريك — Technology Ventures، سان فرانسيسكو وسكوتسديل</p>
+      <p>المشاركة في تأسيس شركات تكنولوجية؛ التطوير التجاري والتوسع في أسواق أمريكية تنافسية.</p>
 
-      <p class="job">مستشار ومهام تنفيذية في التكنولوجيا — الولايات المتحدة (IBM، HIS، MAI – مقاطعة أورانج، كاليفورنيا)</p>
-      <ul>
-        <li>المشاركة في مشاريع مؤسساتية للتكنولوجيا وحلول الأعمال (IBM)</li>
-        <li>مواكبة كبار الزبناء في تنزيل الأنظمة والمبادرات التكنولوجية</li>
-        <li>الإسهام في تحسين النجاعة العملياتية عبر التكنولوجيا (HIS)</li>
-        <li>مشاريع أنظمة تكنولوجية وتدبيرية لخدمة حاجيات الزبناء والمؤسسات (MAI)</li>
-      </ul>
+      <p class="job">مهام تقنية واستشارية — IBM وHIS وMAI (كاليفورنيا)</p>
+      <p>مشاريع مؤسساتية، وتنفيذ أنظمة لفائدة كبار الزبناء، وتحسين النجاعة التشغيلية عبر التكنولوجيا.</p>
 
-      <p class="job">بداية المسار — قطاع الفندقة</p>
-      <ul>
-        <li>عمل بدوام جزئي في الفندقة خلال الدراسات العليا</li>
-        <li>تطوير كفاءات في خدمة الزبناء والتدبير العملياتي والتسيير</li>
-      </ul>
+      <p class="job">بداية المسار</p>
+      <p>العمل في القطاع الفندقي خلال فترة الدراسة: تجربة مؤسِّسة في خدمة الزبناء والتدبير التشغيلي.</p>
 
-      <h3>التكوين</h3>
-      <ul>
-        <li>جامعة مراكش (المغرب) — دراسات جامعية</li>
-        <li>Berkeley Extension، بيركلي (كاليفورنيا، الولايات المتحدة) — دراسات متقدمة في الأعمال والتكنولوجيا</li>
-      </ul>
+      <h3>أبرز المحطات</h3>
+      <p>مسار دولي بين المغرب والولايات المتحدة؛ انتقال من التكنولوجيا إلى الفندقة والعقار؛ نشاط استشاري استراتيجي متواصل بالموازاة مع مشاريع استثمارية بعيدة المدى.</p>
 
-      <h3>اللغات</h3>
-      <p>العربية · الإنجليزية · الفرنسية · الإسبانية</p>
-
-      <h3>محطات مقاولاتية بارزة</h3>
-      <ul>
-        <li>بناء مسار دولي ناجح بين المغرب والولايات المتحدة</li>
-        <li>المشاركة في نمو مقاولات تكنولوجية بكاليفورنيا وأريزونا</li>
-        <li>الانتقال من مسار مسيّر في التكنولوجيا إلى الاستثمار الفندقي والعقاري</li>
-        <li>تدبير وتطوير مشاريع استثمارية بعيدة المدى بالمغرب</li>
-        <li>مواصلة دور الاستشارة الاستراتيجية لفائدة المقاولات عبر الاستشارة التنفيذية</li>
-      </ul>
+      <h3>الكفاءات</h3>
+      <p>القيادة التنفيذية · الاستشارة التكنولوجية · التطوير التجاري · الشراكات الاستراتيجية · المقاولة · الاستثمار العقاري · التدبير الفندقي</p>
 
     </div>
   </div>
 </div>
+
+<!-- Popup — Yassine KNOUZI -->
+<div id="modal-knouzi" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-knouzi-title">
+  <div class="modal-box">
+    <button type="button" class="modal-close" aria-label="إغلاق">&times;</button>
+    <h2 id="modal-knouzi-title">الملخص المهني — Yassine KNOUZI</h2>
+    <div class="modal-body">
+
+      <p>مستشار مالي وتجاري وإداري، متخصص في تحسين الاستثمارات وتثمينها، يواكب Yassine KNOUZI المستثمرين والمسيّرين في تأمين رؤوس أموالهم، وهيكلة تركيبات مالية متينة، وتحقيق أقصى مردودية لمشاريعهم.</p>
+
+      <p>إن تمكّنه الدقيق من الأطر التنظيمية والإدارية، مقروناً برؤية تجارية براغماتية، يتيح تقليص التعرض للمخاطر التشغيلية وتسريع تحقيق العائد على الاستثمار. ويشكّل تدخّله رافعة استراتيجية لتحويل الاستثمارات إلى أصول ناجعة ومستدامة.</p>
+
+    </div>
+  </div>
+</div>
+
+<!-- Popup — Youssef BRIGA -->
+<div id="modal-briga" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-briga-title">
+  <div class="modal-box">
+    <button type="button" class="modal-close" aria-label="إغلاق">&times;</button>
+    <h2 id="modal-briga-title">الملخص المهني — Youssef BRIGA</h2>
+    <div class="modal-body">
+
+      <p>دكتور دولة في القانون العام، يراكم Youssef BRIGA أكثر من 25 سنة من الخبرة إطاراً بإدارة الجمارك. وهو خبير معتمد في المناطق الحرة لدى المنظمة العالمية للجمارك، وحاصل على الحزام الأسود (Black Belt) في Lean Six Sigma وعلى أكثر من 40 شهادة دولية في تدبير المشاريع (Project Management).</p>
+
+      <p>وهو مؤسس المرصد المغربي للاقتصاد وإدماج الاستثمارات OMEII (<a href="https://www.omeii.ma" target="_blank" rel="noopener">www.omeii.ma</a>)، ومؤلف عدة كتب، من بينها: <em>Stratégies d'investissement</em>، و<em>E-commerce et business models digitaux</em>، و<em>Guerres Douanières / Customs Wars</em>.</p>
+
+    </div>
+  </div>
+</div>
+
 <script>
-  // إغلاق النافذة بالنقر خارجها أو بزر Échap
-  document.getElementById('modal-fassil').addEventListener('click', function(e){
-    if(e.target === this){ this.classList.remove('is-open'); }
+  // إغلاق النوافذ: زر ×، أو النقر خارج الصندوق، أو مفتاح Échap
+  document.querySelectorAll('.modal-overlay').forEach(function(m){
+    m.addEventListener('click', function(e){
+      if(e.target === m || e.target.classList.contains('modal-close')){ m.classList.remove('is-open'); }
+    });
   });
   document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape'){ document.getElementById('modal-fassil').classList.remove('is-open'); }
+    if(e.key === 'Escape'){ document.querySelectorAll('.modal-overlay.is-open').forEach(function(m){ m.classList.remove('is-open'); }); }
   });
 </script>
 </body>
