@@ -63,8 +63,7 @@
           </div>
         </div>
 
-        <form class="form-card" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-contact">
-          <input type="hidden" name="form-name" value="contact">
+        <form class="form-card" name="contact" data-geom-form="contact" id="form-contact">
           <p style="display:none">
             <label>لا تملأ هذا الحقل: <input name="bot-field"></label>
           </p>
@@ -76,6 +75,10 @@
           <div class="field">
             <label for="c-email">البريد الإلكتروني</label>
             <input type="email" id="c-email" name="email" dir="ltr" required>
+          </div>
+          <div class="field">
+            <label for="c-telephone">رقم الهاتف (اختياري)</label>
+            <input type="tel" id="c-telephone" name="telephone" autocomplete="tel" dir="ltr">
           </div>
           <div class="field">
             <label for="c-sujet">الموضوع</label>
@@ -90,6 +93,10 @@
             <label for="c-message">الرسالة</label>
             <textarea id="c-message" name="message" required></textarea>
           </div>
+          <div class="field field-check">
+            <input type="checkbox" id="consent-contact" name="consentement" value="oui" required>
+            <label for="consent-contact">أوافق على أن يستعمل GEOM هذه المعطيات لمعالجة طلبي والتواصل معي (القانون رقم 09.08).</label>
+          </div>
           <button class="btn btn-primary" type="submit">إرسال الرسالة</button>
           <p class="form-note">يتوصّل المكتب المسيّر بالرسائل. ويتم الرد في غضون بضعة أيام عمل.</p>
         </form>
@@ -102,6 +109,7 @@
 
 <script src="assets/js/site-chrome.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/forms.js"></script>
 
 </body>
 </html>

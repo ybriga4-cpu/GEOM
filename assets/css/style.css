@@ -295,3 +295,13 @@ canvas{max-width:100%}
 [dir="rtl"] .intro-overlay .intro-skip{right:auto;left:22px}
 [dir="rtl"] .chat-bubble.bot{border-bottom-left-radius:14px;border-bottom-right-radius:4px}
 [dir="rtl"] .chat-bubble.user{border-bottom-right-radius:14px;border-bottom-left-radius:4px}
+
+/* Formulaires — case de consentement et message d'envoi */
+.field-check{display:flex;gap:10px;align-items:flex-start}
+.field-check input[type=checkbox]{width:auto;flex:0 0 auto;margin-top:3px;padding:0}
+.field-check label{margin:0;font-size:.82rem;line-height:1.45}
+.form-status{display:none;font-size:.88rem;margin-top:14px;padding:10px 14px;border-radius:8px}
+.form-status.show{display:block}
+.form-status.ok{background:var(--sky-tint);color:var(--navy)}
+.form-status.err{background:#FBE7E7;color:#8A2A2A}
+.form-status.busy{background:var(--gold-tint);color:#5A4718}

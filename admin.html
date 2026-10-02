@@ -10,7 +10,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-  .admin-shell{max-width:720px;margin:0 auto}
+  .admin-shell{max-width:1040px;margin:0 auto}
+  #entry-form,.gh-card{max-width:720px}
+  .ins-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin-bottom:14px}
+  .ins-bar .field{margin:0;flex:1 1 220px}
+  .ins-table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:8px;background:#fff;max-height:560px;overflow-y:auto}
+  .ins-table{width:100%;border-collapse:collapse;font-size:.82rem}
+  .ins-table th{position:sticky;top:0;background:var(--navy);color:#fff;text-align:left;padding:9px 10px;white-space:nowrap;font-weight:500}
+  .ins-table td{padding:8px 10px;border-top:1px solid var(--border);vertical-align:top;max-width:320px;overflow-wrap:anywhere}
+  .ins-table tr:nth-child(even) td{background:var(--sky-tint-2)}
+  .ins-count{font-size:.85rem;color:var(--ink-soft);margin:8px 0}
+  .admin-sep{border:0;border-top:1px solid var(--border);margin:44px 0 32px}
   .admin-gate{max-width:380px;margin:80px auto;text-align:center}
   .admin-gate .field{text-align:left}
   .status-line{font-size:.85rem;margin-top:14px;padding:10px 14px;border-radius:8px;display:none}
@@ -53,10 +63,38 @@
     <!-- ===== Backoffice (visible après mot de passe) ===== -->
     <div id="panel" style="display:none">
       <p class="eyebrow">Backoffice</p>
+      <h1>Inscriptions &amp; messages</h1>
+      <p class="lede">Demandes d'adhésion, propositions de don et messages de contact reçus via le site. Les données sont stockées dans la Google Sheet de GEOM — ce tableau en est une lecture directe.</p>
+
+      <div class="form-card" style="max-width:none;margin:24px 0">
+        <div class="ins-bar">
+          <div class="field">
+            <label for="ins-key">Clé d'accès aux inscriptions</label>
+            <input type="password" id="ins-key" autocomplete="off" placeholder="Clé définie dans le script Google">
+          </div>
+          <button class="btn btn-primary" type="button" id="ins-load">Afficher</button>
+        </div>
+        <div class="import-tabs" id="ins-tabs">
+          <button type="button" class="import-tab is-active" data-form="adhesion">Adhésions</button>
+          <button type="button" class="import-tab" data-form="don">Dons</button>
+          <button type="button" class="import-tab" data-form="contact">Contact</button>
+        </div>
+        <div class="ins-bar">
+          <div class="field">
+            <input type="search" id="ins-search" placeholder="Rechercher (nom, e-mail, entreprise…)">
+          </div>
+          <button class="btn" type="button" id="ins-csv" disabled>Exporter en CSV</button>
+        </div>
+        <p class="ins-count" id="ins-count"></p>
+        <div class="ins-table-wrap"><table class="ins-table" id="ins-table"></table></div>
+        <p class="status-line" id="ins-status"></p>
+      </div>
+
+      <hr class="admin-sep">
       <h1>Ajouter un contenu</h1>
       <p class="lede">Publie directement sur le site via votre dépôt GitHub — chaque ajout crée un commit, Netlify redéploie automatiquement en une à deux minutes.</p>
 
-      <div class="form-card" style="margin:24px 0">
+      <div class="form-card gh-card" style="margin:24px 0">
         <h3 style="margin-bottom:10px">Connexion GitHub</h3>
         <p class="hint" style="margin-bottom:12px">
           Jeton d'accès personnel (scope <code>repo</code> ou <code>contents:write</code> sur ce dépôt uniquement).
@@ -197,9 +235,9 @@
   });
 
   // ---------- Tabs d'import ----------
-  document.querySelectorAll(".import-tab").forEach((tab) => {
+  document.querySelectorAll(".import-tab[data-import]").forEach((tab) => {
     tab.addEventListener("click", () => {
-      document.querySelectorAll(".import-tab").forEach((t) => t.classList.remove("is-active"));
+      document.querySelectorAll(".import-tab[data-import]").forEach((t) => t.classList.remove("is-active"));
       document.querySelectorAll(".import-panel").forEach((p) => p.classList.remove("is-active"));
       tab.classList.add("is-active");
       document.querySelector(`[data-panel="${tab.dataset.import}"]`).classList.add("is-active");
@@ -385,6 +423,93 @@
       setStatus("Erreur : " + e.message, "err");
     }
   });
+</script>
+<script src="assets/js/forms.js"></script>
+<script>
+  // ---------- Inscriptions : lecture de la Google Sheet ----------
+  (function () {
+    const KEY_STORE = "geom-ins-key";
+    const keyInput = document.getElementById("ins-key");
+    const table = document.getElementById("ins-table");
+    const countEl = document.getElementById("ins-count");
+    const statusEl = document.getElementById("ins-status");
+    const searchEl = document.getElementById("ins-search");
+    const csvBtn = document.getElementById("ins-csv");
+    let current = "adhesion", data = null;
+
+    try { keyInput.value = sessionStorage.getItem(KEY_STORE) || ""; } catch (e) {}
+
+    function status(msg, kind) {
+      statusEl.textContent = msg || "";
+      statusEl.className = msg ? `status-line show ${kind}` : "status-line";
+    }
+
+    async function load() {
+      const endpoint = window.GEOM_FORMS_ENDPOINT || "";
+      const key = keyInput.value.trim();
+      if (endpoint.indexOf("/exec") === -1) { status("URL du script Google non configurée dans assets/js/forms.js.", "err"); return; }
+      if (!key) { status("Saisissez la clé d'accès.", "err"); return; }
+      try { sessionStorage.setItem(KEY_STORE, key); } catch (e) {}
+      status("Chargement…", "busy");
+      try {
+        const res = await fetch(`${endpoint}?form=${encodeURIComponent(current)}&key=${encodeURIComponent(key)}`);
+        const json = await res.json();
+        if (json.error) throw new Error(json.error);
+        data = json;
+        status("");
+        render();
+      } catch (e) {
+        data = null; render();
+        status("Erreur : " + e.message, "err");
+      }
+    }
+
+    function filtered() {
+      if (!data) return [];
+      const q = searchEl.value.trim().toLowerCase();
+      return q ? data.rows.filter(r => r.join(" ").toLowerCase().includes(q)) : data.rows;
+    }
+
+    function render() {
+      table.textContent = "";
+      csvBtn.disabled = !data;
+      if (!data) { countEl.textContent = ""; return; }
+      const rows = filtered();
+      countEl.textContent = `${rows.length} enregistrement(s)` + (rows.length !== data.rows.length ? ` sur ${data.rows.length}` : "");
+      const thead = table.createTHead().insertRow();
+      data.headers.forEach(h => { const th = document.createElement("th"); th.textContent = h; thead.appendChild(th); });
+      const tbody = table.createTBody();
+      rows.forEach(r => {
+        const tr = tbody.insertRow();
+        r.forEach(v => { tr.insertCell().textContent = v; }); // texte brut : aucun HTML interprété
+      });
+    }
+
+    function exportCsv() {
+      if (!data) return;
+      const esc = v => `"${String(v).replace(/"/g, '""')}"`;
+      const lines = [data.headers, ...filtered()].map(r => r.map(esc).join(";"));
+      const blob = new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `geom-${current}-${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    document.getElementById("ins-load").addEventListener("click", load);
+    keyInput.addEventListener("keydown", e => { if (e.key === "Enter") load(); });
+    searchEl.addEventListener("input", render);
+    csvBtn.addEventListener("click", exportCsv);
+    document.querySelectorAll("#ins-tabs .import-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll("#ins-tabs .import-tab").forEach(t => t.classList.remove("is-active"));
+        tab.classList.add("is-active");
+        current = tab.dataset.form;
+        if (keyInput.value.trim()) load(); else { data = null; render(); }
+      });
+    });
+  })();
 </script>
 </body>
 </html>

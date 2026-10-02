@@ -36,8 +36,7 @@
           <h2>الانخراط — مجاناً</h2>
           <p class="lede" style="margin-bottom:20px">يدرس المكتب المسيّر طلبكم. وستتوصلون بإشعار بالتوصل، ثم بتأكيد في حالة القبول (المادة 6 من النظام الأساسي).</p>
 
-          <form class="form-card" name="adhesion" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-adhesion">
-            <input type="hidden" name="form-name" value="adhesion">
+          <form class="form-card" name="adhesion" data-geom-form="adhesion" id="form-adhesion">
             <p style="display:none">
               <label>لا تملأ هذا الحقل: <input name="bot-field"></label>
             </p>
@@ -48,7 +47,15 @@
             </div>
             <div class="field">
               <label for="email">البريد الإلكتروني</label>
-              <input type="email" id="email" name="email" dir="ltr" required>
+              <input type="email" id="email" name="email" autocomplete="email" dir="ltr" required>
+            </div>
+            <div class="field">
+              <label for="telephone">رقم الهاتف</label>
+              <input type="tel" id="telephone" name="telephone" autocomplete="tel" dir="ltr" required>
+            </div>
+            <div class="field">
+              <label for="entreprise">المقاولة / الهيئة</label>
+              <input type="text" id="entreprise" name="entreprise" autocomplete="organization">
             </div>
             <div class="field">
               <label for="categorie">الفئة المطلوبة</label>
@@ -74,6 +81,10 @@
               <label for="message">الدوافع (اختياري)</label>
               <textarea id="message" name="message"></textarea>
             </div>
+            <div class="field field-check">
+              <input type="checkbox" id="consent-adhesion" name="consentement" value="oui" required>
+              <label for="consent-adhesion">أوافق على أن يستعمل GEOM هذه المعطيات لمعالجة طلبي والتواصل معي (القانون رقم 09.08).</label>
+            </div>
             <button class="btn btn-primary" type="submit">إرسال طلب الانخراط</button>
             <p class="form-note">لن يُطلب منكم أبداً أي اشتراك، لا عند الانخراط ولا بشكل دوري.</p>
           </form>
@@ -83,8 +94,7 @@
           <h2>الدعم بهبة</h2>
           <p class="lede" style="margin-bottom:20px">لا يتقاضى GEOM أي اشتراك من أعضائه: فالهبات والإعانات والرعاية هي المورد الوحيد الذي يتيح تمويل المنشورات والندوات والمرصد.</p>
 
-          <form class="form-card" name="don" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-don">
-            <input type="hidden" name="form-name" value="don">
+          <form class="form-card" name="don" data-geom-form="don" id="form-don">
             <p style="display:none">
               <label>لا تملأ هذا الحقل: <input name="bot-field"></label>
             </p>
@@ -98,6 +108,10 @@
               <input type="email" id="don-email" name="email" dir="ltr" required>
             </div>
             <div class="field">
+              <label for="don-telephone">رقم الهاتف (اختياري)</label>
+              <input type="tel" id="don-telephone" name="telephone" autocomplete="tel" dir="ltr">
+            </div>
+            <div class="field">
               <label for="don-type">نوع الدعم</label>
               <select id="don-type" name="type">
                 <option value="don-ponctuel">هبة ظرفية</option>
@@ -108,6 +122,10 @@
             <div class="field">
               <label for="don-message">توضيحات (اختياري)</label>
               <textarea id="don-message" name="message"></textarea>
+            </div>
+            <div class="field field-check">
+              <input type="checkbox" id="consent-don" name="consentement" value="oui" required>
+              <label for="consent-don">أوافق على أن يستعمل GEOM هذه المعطيات لمعالجة طلبي والتواصل معي (القانون رقم 09.08).</label>
             </div>
             <button class="btn btn-primary" type="submit">أرغب في أن يُتّصل بي بخصوص هبة</button>
             <p class="form-note">ستُبلَّغون بالكيفيات العملية (تحويل بنكي أو وسائل أخرى) مباشرة من طرف أمين المال.</p>
@@ -121,7 +139,7 @@
   <section class="section-alt">
     <div class="wrap">
       <div class="note-box">
-        <strong>ملاحظة ميدانية:</strong> صُمّم هذا النموذج ليعمل دون خادم خلفي، عبر الرصد التلقائي للنماذج من طرف المستضيف (Netlify). ولا تُعالَج أي معطيات من طرف خدمة خارجية غير مصرّح بها، طبقاً للقانون رقم 09.08.
+        <strong>حماية المعطيات:</strong> تُستعمل المعطيات المُرسَلة (الاسم، البريد الإلكتروني، الهاتف، المقاولة) حصرياً من طرف المكتب المسيّر لـ GEOM لمعالجة طلبكم، ولا تُفوَّت ولا تُباع. وطبقاً للقانون رقم 09.08، يمكنكم طلب الاطلاع عليها أو تصحيحها أو حذفها عبر <bdi dir="ltr">contact@geom.ma</bdi>.
       </div>
     </div>
   </section>
@@ -133,6 +151,7 @@
 
 <script src="assets/js/site-chrome.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/forms.js"></script>
 
 </body>
 </html>

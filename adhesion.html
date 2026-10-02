@@ -36,8 +36,7 @@
           <h2>Devenir membre — gratuit</h2>
           <p class="lede" style="margin-bottom:20px">Votre demande est examinée par le Bureau Dirigeant. Vous recevrez un accusé de réception, puis une confirmation en cas d'admission (article 6 des statuts).</p>
 
-          <form class="form-card" name="adhesion" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-adhesion">
-            <input type="hidden" name="form-name" value="adhesion">
+          <form class="form-card" name="adhesion" data-geom-form="adhesion" id="form-adhesion">
             <p style="display:none">
               <label>Ne pas remplir : <input name="bot-field"></label>
             </p>
@@ -48,7 +47,15 @@
             </div>
             <div class="field">
               <label for="email">Adresse e-mail</label>
-              <input type="email" id="email" name="email" required>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="telephone">Téléphone</label>
+              <input type="tel" id="telephone" name="telephone" autocomplete="tel" required>
+            </div>
+            <div class="field">
+              <label for="entreprise">Entreprise / organisme</label>
+              <input type="text" id="entreprise" name="entreprise" autocomplete="organization">
             </div>
             <div class="field">
               <label for="categorie">Catégorie souhaitée</label>
@@ -74,6 +81,10 @@
               <label for="message">Motivation (facultatif)</label>
               <textarea id="message" name="message"></textarea>
             </div>
+            <div class="field field-check">
+              <input type="checkbox" id="consent-adhesion" name="consentement" value="oui" required>
+              <label for="consent-adhesion">J'accepte que GEOM utilise ces informations pour traiter ma demande et me recontacter (loi 09-08).</label>
+            </div>
             <button class="btn btn-primary" type="submit">Envoyer ma demande d'adhésion</button>
             <p class="form-note">Aucune cotisation, initiale ou périodique, ne vous sera jamais demandée.</p>
           </form>
@@ -83,8 +94,7 @@
           <h2>Soutenir par un don</h2>
           <p class="lede" style="margin-bottom:20px">GEOM ne perçoit aucune cotisation de ses membres : les dons, subventions et parrainages sont la seule ressource qui permet de financer les publications, colloques et l'Observatoire.</p>
 
-          <form class="form-card" name="don" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-don">
-            <input type="hidden" name="form-name" value="don">
+          <form class="form-card" name="don" data-geom-form="don" id="form-don">
             <p style="display:none">
               <label>Ne pas remplir : <input name="bot-field"></label>
             </p>
@@ -98,6 +108,10 @@
               <input type="email" id="don-email" name="email" required>
             </div>
             <div class="field">
+              <label for="don-telephone">Téléphone (facultatif)</label>
+              <input type="tel" id="don-telephone" name="telephone" autocomplete="tel">
+            </div>
+            <div class="field">
               <label for="don-type">Type de soutien</label>
               <select id="don-type" name="type">
                 <option value="don-ponctuel">Don ponctuel</option>
@@ -108,6 +122,10 @@
             <div class="field">
               <label for="don-message">Précisions (facultatif)</label>
               <textarea id="don-message" name="message"></textarea>
+            </div>
+            <div class="field field-check">
+              <input type="checkbox" id="consent-don" name="consentement" value="oui" required>
+              <label for="consent-don">J'accepte que GEOM utilise ces informations pour traiter ma demande et me recontacter (loi 09-08).</label>
             </div>
             <button class="btn btn-primary" type="submit">Être recontacté·e pour un don</button>
             <p class="form-note">Les modalités pratiques (virement, autres moyens) vous seront transmises directement par le Trésorier.</p>
@@ -121,7 +139,7 @@
   <section class="section-alt">
     <div class="wrap">
       <div class="note-box">
-        <strong>Note de terrain :</strong> ce formulaire est prévu pour fonctionner sans backend, via la détection automatique des formulaires par l'hébergeur (Netlify). Aucune donnée n'est traitée par un service tiers non déclaré, conformément à la loi 09-08.
+        <strong>Protection des données :</strong> les informations transmises (nom, e-mail, téléphone, entreprise) sont utilisées uniquement par le Bureau Dirigeant de GEOM pour traiter votre demande. Elles ne sont ni cédées ni vendues. Conformément à la loi 09-08, vous pouvez en demander la consultation, la rectification ou la suppression à contact@geom.ma.
       </div>
     </div>
   </section>
@@ -133,6 +151,7 @@
 
 <script src="assets/js/site-chrome.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/forms.js"></script>
 
 </body>
 </html>

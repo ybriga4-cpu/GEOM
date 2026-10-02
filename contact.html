@@ -63,8 +63,7 @@
           </div>
         </div>
 
-        <form class="form-card" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="form-contact">
-          <input type="hidden" name="form-name" value="contact">
+        <form class="form-card" name="contact" data-geom-form="contact" id="form-contact">
           <p style="display:none">
             <label>Ne pas remplir : <input name="bot-field"></label>
           </p>
@@ -76,6 +75,10 @@
           <div class="field">
             <label for="c-email">Adresse e-mail</label>
             <input type="email" id="c-email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="c-telephone">Téléphone (facultatif)</label>
+            <input type="tel" id="c-telephone" name="telephone" autocomplete="tel">
           </div>
           <div class="field">
             <label for="c-sujet">Sujet</label>
@@ -90,6 +93,10 @@
             <label for="c-message">Message</label>
             <textarea id="c-message" name="message" required></textarea>
           </div>
+          <div class="field field-check">
+            <input type="checkbox" id="consent-contact" name="consentement" value="oui" required>
+            <label for="consent-contact">J'accepte que GEOM utilise ces informations pour traiter ma demande et me recontacter (loi 09-08).</label>
+          </div>
           <button class="btn btn-primary" type="submit">Envoyer le message</button>
           <p class="form-note">Les messages sont reçus par le Bureau Dirigeant. Réponse sous quelques jours ouvrés.</p>
         </form>
@@ -102,6 +109,7 @@
 
 <script src="assets/js/site-chrome.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/forms.js"></script>
 
 </body>
 </html>
